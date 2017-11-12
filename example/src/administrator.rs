@@ -1,15 +1,14 @@
 
-use rocket;
-use rocket::{Request, Data, Outcome, Response};
-use ::rocket::config::{Config, Environment};
-use rocket::data::FromData;
-use rocket::http::{Cookie, Cookies, MediaType, ContentType, Status, RawStr};
-use rocket::request::{FlashMessage, Form, FromRequest,FromForm, FormItems, FromFormValue, FromParam};
-use rocket::response::{content, NamedFile, Redirect, Flash, Responder, Content};
-use rocket::response::content::Html;
+use rocket::{Request, Outcome};
+use rocket::request::FromRequest;
+// use rocket::{Request, Data, Outcome, Response};
+// use rocket::http::{Cookie, Cookies, MediaType, ContentType, Status, RawStr};
+// use rocket::request::{FlashMessage, Form, FromRequest,FromForm, FormItems, FromFormValue, FromParam};
+// use rocket::response::{content, NamedFile, Redirect, Flash, Responder, Content};
+// use rocket::response::content::Html;
 
-use auth::sanitization::*;
 use auth::authorization::*;
+// use auth::sanitization::*;
 
 /// The AdministratorCookie type is used to indicate a user has logged in as an administrator
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -54,6 +53,7 @@ impl AuthorizeCookie for AdministratorCookie {
     fn store_cookie(&self) -> String {
         String::from("This is my cooky")
     }
+    #[allow(unused_variables)]
     fn retrieve_cookie(string: String) -> Option<Self::CookieType> {
         Some(
             AdministratorCookie {
@@ -68,7 +68,6 @@ impl AuthorizeCookie for AdministratorCookie {
 impl AuthorizeForm for AdministratorForm {
     type CookieType = AdministratorCookie;
     
-    // fn authenticate(&self) -> Result<Self::CookieType, (String, String)> {
     fn authenticate(&self) -> Result<Self::CookieType, AuthFail> {
         println!("Authenticating {} with password: {}", &self.username, &self.password);
         if &self.username == "administrator" && &self.password != "" {
@@ -80,7 +79,6 @@ impl AuthorizeForm for AdministratorForm {
                 }
             )
         } else {
-            // Err(self.username.to_string(), "Incorrect username".to_string())
             Err(
                 AuthFail::new(self.username.to_string(), "Incorrect username".to_string())
             )
@@ -103,16 +101,6 @@ impl<'a, 'r> FromRequest<'a, 'r> for AdministratorCookie {
         let cid = AdministratorCookie::cookie_id();
         let mut cookies = request.cookies();
         
-        // match cookies.get_private(cid) {
-        //     Some(cookie) => Outcome::Success(
-        //         AdministratorCookie::retrieve_cookie(cookie.value().to_string()),
-        //         // AdministratorCookie {
-        //         //     // Performance: find a way to remove the to_string()
-        //         //     cookie: T::retrieve_cookie(cookie.value().to_string()),
-        //         // }
-        //     ),
-        //     None => Outcome::Forward(())
-        // }
         match cookies.get_private(cid) {
             Some(cookie) => {
                 if let Some(cookie_deserialized) = AdministratorCookie::retrieve_cookie(cookie.value().to_string()) {

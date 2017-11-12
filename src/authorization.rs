@@ -1,10 +1,8 @@
 
-use rocket::{Request, Data, Outcome, Response};
-use rocket::response::{content, NamedFile, Redirect, Flash, Responder, Content};
-use rocket::response::content::Html;
-use rocket::data::FromData;
-use rocket::request::{FlashMessage, Form, FromRequest, FromForm, FormItems};
-use rocket::http::{Cookie, Cookies, MediaType, ContentType, Status};
+use rocket::{Request, Outcome};
+use rocket::response::{Redirect, Flash};
+use rocket::request::{FromRequest, FromForm, FormItems};
+use rocket::http::{Cookie, Cookies};
 
 use std::marker::Sized;
 use sanitization::*;
@@ -50,15 +48,11 @@ pub trait CookieId {
     fn cookie_id<'a>() -> &'a str {
         "sid"
     }
-    // fn add_cookie(mut cookies: Cookies, contents: &str) {
-    //     cookies.add_private(Cookie::new(Self::cookie_id(), contents));
-    // }
 }
 
 pub trait AuthorizeCookie : CookieId {
     type CookieType: AuthorizeCookie;
     fn store_cookie(&self) -> String;
-    // fn retrieve_cookie(String) -> Option<Self::CookieType>;
     fn retrieve_cookie(String) -> Option<Self> where Self: Sized;
     fn delete_cookie(mut cookies: Cookies) {
         cookies.remove_private( 
@@ -70,16 +64,12 @@ pub trait AuthorizeCookie : CookieId {
 pub trait AuthorizeForm : CookieId {
     type CookieType: AuthorizeCookie;
     
-    // fn authenticate(&self) -> Result<Self::CookieType, (String, String)>;
     fn authenticate(&self) -> Result<Self::CookieType, AuthFail>;
     
     fn new_form(&str, &str) -> Self;
     
     /// The fail_url() method is used to create a url that the user is sent
     /// to when the authentication fails.  The
-    // fn fail_url(url: &str, user: &str) -> String {
-        // let mut output = String::with_capacity(url.len() + user.len() + 10);
-        // output.push_str(url);
     fn fail_url(user: &str) -> String {
         let mut output = String::with_capacity(user.len() + 10);
         output.push_str("?user=");
@@ -98,7 +88,6 @@ pub trait AuthorizeForm : CookieId {
             Err(fail) => {
                 let mut furl = String::from(err_redir);
                 if &fail.user != "" {
-                    // let furl_qrystr = Self::fail_url(ename, emsg);
                     let furl_qrystr = Self::fail_url(&fail.user);
                     furl.push_str(&furl_qrystr);
                 }
@@ -106,24 +95,13 @@ pub trait AuthorizeForm : CookieId {
             },
         }
     }
-    
-    // fn redirect(&self, ok_redir: &str, err_redir: &str, mut cookies: Cookies) -> Result<Redirect, Redirect> {
-        // ...
-        // same code as flash_redirect except
-        // just redirect, no flash messages
-    // }
 }
-
-// impl<T: AuthorizeCookie> AuthCont<T> {
+    
 impl<T: AuthorizeCookie + Clone> AuthCont<T> {
     pub fn cookie_data(&self) -> T {
         self.cookie.clone()
     }
 }
-
-// impl<A: AuthorizeForm> LoginCont<A> {
-//     pub fn redirect() -> Result
-// }
 
 
 impl<'a, 'r, T: AuthorizeCookie> FromRequest<'a, 'r> for AuthCont<T> {
@@ -134,20 +112,11 @@ impl<'a, 'r, T: AuthorizeCookie> FromRequest<'a, 'r> for AuthCont<T> {
         let mut cookies = request.cookies();
         
         match cookies.get_private(cid) {
-            // Some(cookie) => Outcome::Success(
-            //     AuthCont {
-            //         // Performance: find a way to remove the to_string()
-            //         cookie: T::retrieve_cookie(cookie.value().to_string()),
-            //     }
-            // ),
             Some(cookie) => {
-                // if let Some(cookie_deserialized) = T::retrieve_cookie(cookie.value().to_string()) {
                 if let Some(cookie_deserialized) = T::retrieve_cookie(cookie.value().to_string()) {
                     Outcome::Success(
                         AuthCont {
-                            // Performance: find a way to remove the to_string()
                             cookie: cookie_deserialized,
-                            // cookie: <T as authorization::AuthorizeCookie>::CookieType
                         }
                     )
                 } else {

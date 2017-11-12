@@ -3,37 +3,29 @@
 #![feature(plugin)]
 #![plugin(rocket_codegen)]
 
-
 extern crate rocket;
-// extern crate rocket_contrib;
-// extern crate rocket_simpleauth as auth;
 extern crate serde;
 #[macro_use] extern crate serde_derive;
 extern crate rmp_serde as rmps;
-
-#[macro_use] extern crate lazy_static;
 extern crate regex;
 extern crate time;
-
 extern crate titlecase;
-#[macro_use] extern crate serde_json;
 extern crate htmlescape;
 
-// use rocket_contrib::Template;
-use rocket::{Request, Data, Outcome, Response};
-use rocket::response::{content, NamedFile, Redirect, Flash, Responder, Content};
+// #[macro_use] extern crate lazy_static;
+// #[macro_use] extern crate serde_json;
+
+// use rocket::{Request, Data, Outcome, Response};
+use rocket::response::{NamedFile, Redirect, Flash};
 use rocket::response::content::Html;
-use rocket::data::FromData;
 use rocket::request::{FlashMessage, Form};
-use rocket::http::{Cookie, Cookies, MediaType, ContentType, Status};
-// let html = ContentType::HTML;
+use rocket::http::{Cookie, Cookies};
 use std::path::{Path, PathBuf};
 
 extern crate rocket_auth_login as auth;
 
-use auth::*;
-use auth::sanitization::*;
 use auth::authorization::*;
+// use auth::sanitization::*;
 
 mod administrator;
 mod layout;
@@ -41,11 +33,12 @@ mod layout;
 use administrator::*;
 use layout::*;
 
+#[allow(dead_code)]
 const URL: &'static str = "http://localhost:8000";
 const LOGIN_URL: &'static str = "http://localhost:8000/login";
 
 #[get("/login", rank = 1)]
-fn logged_in(user: AuthCont<AdministratorCookie>) -> Html<String> {
+fn logged_in(_user: AuthCont<AdministratorCookie>) -> Html<String> {
     layout("You are logged in.")
 }
 #[get("/login", rank = 2)]
@@ -53,19 +46,12 @@ fn login() -> Html<String> {
     layout(&layout_form(LOGIN_URL))
 }
 
-// if there is no user query string indicating the user attempted and failed to login
-// display only the basic login screen
-// #[get("/login", rank = 4)]
-// fn retry_login() -> Html<String> {
-//     layout(&layout_retry_form(LOGIN_URL, ""))
-// }
 
-// if there is a user query string, and an optional flash message
-// display an optional flash message indicating why the login failed
-// and the login screen with user filled in
+/// if there is a user query string, and an optional flash message
+/// display an optional flash message indicating why the login failed
+/// and the login screen with user filled in
 #[get("/login?<user>")]
 fn retry_login_user(user: UserQuery, flash_msg_opt: Option<FlashMessage>) -> Html<String> {
-    // layout(&layout_retry_form(LOGIN_URL, user.user))
     let login_form = layout_retry_form(LOGIN_URL, &user.user);
     let alert;
     if let Some(flash) = flash_msg_opt {
@@ -81,8 +67,8 @@ fn retry_login_user(user: UserQuery, flash_msg_opt: Option<FlashMessage>) -> Htm
     
 }
 
-// if there is a flash message but no user query string
-// display why the login failed and display the login screen
+/// if there is a flash message but no user query string
+/// display why the login failed and display the login screen
 #[get("/login", rank = 3)]
 fn retry_login_flash(flash_msg: FlashMessage) -> Html<String> {
     println!("Retrying login...");
@@ -95,19 +81,18 @@ fn retry_login_flash(flash_msg: FlashMessage) -> Html<String> {
     layout(&contents)
 }
 
+#[allow(unused_mut)]
 #[post("/login", data = "<form>")]
 fn process_login(form: Form<LoginCont<AdministratorForm>>, mut cookies: Cookies) -> Result<Redirect, Flash<Redirect>> {
     let inner = form.into_inner();
-    // let login = inner.form();
     let login = inner.form;
     login.flash_redirect("/login", "/login", cookies)
 }
 
 #[get("/logout")]
 fn logout(admin: Option<AdministratorCookie>, mut cookies: Cookies) -> Result<Flash<Redirect>, Redirect> {
-    if let Some(a) = admin {
+    if let Some(_) = admin {
         cookies.remove_private(Cookie::named(AdministratorCookie::cookie_id()));
-        // cookies.remove_private(Cookie::named("user_id"));
         Ok(Flash::success(Redirect::to("/"), "Successfully logged out."))
     } else {
         Err(Redirect::to("/login"))
@@ -140,15 +125,16 @@ fn static_files(file: PathBuf) -> Option<NamedFile> {
 }
 
 fn main() {
-    // println!("Hello, world!");
-    
         rocket::ignite()
+        
+        // If using a database connection:
         // .manage(data::init_pg_pool())
+        
+        // zig using rocket_contrib's Templates
         // .attach(Template::fairing())
         .mount("/", routes![
             logged_in,
             login,
-            // retry_login,
             retry_login_user,
             retry_login_flash,
             process_login,

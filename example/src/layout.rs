@@ -2,7 +2,7 @@
 use rocket::response::content::Html;
 
 use auth::sanitization::*;
-use auth::authorization::*;
+// use auth::authorization::*;
 
 pub fn layout(contents: &str) -> Html<String> {
     // if padding should be added, add it here and change the contents variable name below
@@ -14,7 +14,6 @@ pub fn layout(contents: &str) -> Html<String> {
 }
 
 
-// pub fn layout_header() -> &'static str { }
 pub const LAYOUT_HEADER: &'static str = r##"
 <!doctype html>
 <html lang="en">
@@ -90,6 +89,7 @@ pub const LAYOUT_HEADER: &'static str = r##"
                         
 "##;
 
+// A possible function to pad the left side of each line of output to match the layout template
 // pub fn pad_output(input: String) -> String {
 //     input.lines().map(|mut o|
 //         // if the line already begins with at least 6 tabs or 24 spaces do nothing
@@ -103,7 +103,6 @@ pub const LAYOUT_HEADER: &'static str = r##"
 //         )
 // }
 
-// pub fn layout_footer() -> &'static str { }
 pub const LAYOUT_FOOTER: &'static str = r##"
                     </div>
                     <footer id="v-footer">
@@ -131,8 +130,6 @@ pub const LAYOUT_FOOTER: &'static str = r##"
 </html>
 "##;
 
-// pub fn layout_form(url: &str) -> &'static str { }
-// pub const LAYOUT_FORM: &'static str = r##"
 pub fn layout_form(url: &str) -> String {
     format!(r##"
                         <form id="needs-validation" action="{url}" name="login_form" method="post" novalidate>
@@ -193,7 +190,7 @@ pub fn layout_retry_form(url: &str, username: &str) -> String {
 "##, url=url, username=sanitize(username))
 }
 
-
+#[allow(dead_code)]
 pub fn alert_danger(msg: &str) -> String {
     format!(r##"
                         <div class="v-centered-msg alert alert-danger" role="alert">
@@ -201,6 +198,7 @@ pub fn alert_danger(msg: &str) -> String {
                         </div>
 "##, why=msg)
 }
+#[allow(dead_code)]
 pub fn alert_success(msg: &str) -> String {
     format!(r##"
                         <div class="v-centered-msg alert alert-success" role="alert">
@@ -208,6 +206,7 @@ pub fn alert_success(msg: &str) -> String {
                         </div>
 "##, why=msg)
 }
+#[allow(dead_code)]
 pub fn alert_info(msg: &str) -> String {
     format!(r##"
                         <div class="v-centered-msg alert alert-info" role="alert">
@@ -215,6 +214,7 @@ pub fn alert_info(msg: &str) -> String {
                         </div>
 "##, why=msg)
 }
+#[allow(dead_code)]
 pub fn alert_warning(msg: &str) -> String {
     format!(r##"
                         <div class="v-centered-msg alert alert-warning" role="alert">
@@ -222,6 +222,7 @@ pub fn alert_warning(msg: &str) -> String {
                         </div>
 "##, why=msg)
 }
+#[allow(dead_code)]
 pub fn alert_primary(msg: &str) -> String {
     format!(r##"
                         <div class="v-centered-msg alert alert-primary" role="alert">
