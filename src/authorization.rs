@@ -62,6 +62,7 @@ pub trait AuthorizeCookie : CookieId {
 }
 
 pub trait AuthorizeForm : CookieId {
+    // Todo: remove this associated type, no longer used
     type CookieType: AuthorizeCookie;
     
     fn authenticate(&self) -> Result<Self::CookieType, AuthFail>;
