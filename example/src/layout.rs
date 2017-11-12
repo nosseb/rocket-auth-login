@@ -26,24 +26,19 @@ pub const LAYOUT_HEADER: &'static str = r##"
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Vishus Blog</title>
+        <title>Rocket Authorization Login Example</title>
         
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
-        <!-- Font Awesome -->
-        <!-- <link rel="stylesheet" href="css/font-awesome.min.css"> -->
-        
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
         
         <!-- Custom CSS -->
-        <!-- <link id="pageStyleSheet" type="text/css" href="css/blog.css" rel="stylesheet" /> -->
-        <link id="pageStyleSheet" type="text/css" href="css/blogr.css" rel="stylesheet" />
+        <link id="css-stylesheet" type="text/css" href="css/blogr.css" rel="stylesheet" />
         
         <!-- JavaScript -->
-        <!-- <script src="js-head.js"></script>  -->
         <script src="sha256.js"></script>
         <script src="login.js"></script>
         
@@ -58,7 +53,7 @@ pub const LAYOUT_HEADER: &'static str = r##"
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="blog-logo navbar-brand" href="">Vishus Blog</a>
+                <a class="blog-logo navbar-brand" href="">My Blog</a>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="v-nav navbar-nav mr-auto">
@@ -114,7 +109,7 @@ pub const LAYOUT_HEADER: &'static str = r##"
 pub const LAYOUT_FOOTER: &'static str = r##"
                     </div>
                     <footer id="v-footer">
-                        <div class="v-copyright">&copy; 2017 Andrew Prindle | <a href="rss.xml">RSS</a></div>
+                        <div class="v-copyright">Design &copy; 2017 Andrew Prindle | <a>RSS</a></div>
                         <!-- <div class="v-generation-time">Generated in  seconds</div> -->
                     </footer>
                 </div>
@@ -128,9 +123,6 @@ pub const LAYOUT_FOOTER: &'static str = r##"
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
         
         <!-- Custom JavaScript -->
-        <!-- <script src="sha256.js"></script> -->
-        <!-- <script src="blog.js"></script> -->
-        <script src="blog_after.js"></script>
         <script>
         </script>
         
