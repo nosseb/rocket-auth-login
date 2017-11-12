@@ -6,6 +6,7 @@ use rocket::data::FromData;
 use rocket::request::{FlashMessage, Form, FromRequest, FromForm, FormItems};
 use rocket::http::{Cookie, Cookies, MediaType, ContentType, Status};
 
+use std::marker::Sized;
 use sanitization::*;
 
 #[derive(Debug, Clone, FromForm)]
@@ -55,10 +56,10 @@ pub trait CookieId {
 }
 
 pub trait AuthorizeCookie : CookieId {
-    // type CookieType: AuthorizeCookie;
+    type CookieType: AuthorizeCookie;
     fn store_cookie(&self) -> String;
-    // fn retrieve_cookie(String) -> Option<CookieType>;
-    fn retrieve_cookie(String) -> Option<Self>;
+    // fn retrieve_cookie(String) -> Option<Self::CookieType>;
+    fn retrieve_cookie(String) -> Option<Self> where Self: Sized;
     fn delete_cookie(mut cookies: Cookies) {
         cookies.remove_private( 
            Cookie::named( Self::cookie_id() )
@@ -127,7 +128,7 @@ impl<T: AuthorizeCookie + Clone> AuthCont<T> {
 
 impl<'a, 'r, T: AuthorizeCookie> FromRequest<'a, 'r> for AuthCont<T> {
     type Error = ();
-
+    
     fn from_request(request: &'a Request<'r>) -> ::rocket::request::Outcome<AuthCont<T>,Self::Error>{
         let cid = T::cookie_id();
         let mut cookies = request.cookies();
@@ -140,11 +141,13 @@ impl<'a, 'r, T: AuthorizeCookie> FromRequest<'a, 'r> for AuthCont<T> {
             //     }
             // ),
             Some(cookie) => {
+                // if let Some(cookie_deserialized) = T::retrieve_cookie(cookie.value().to_string()) {
                 if let Some(cookie_deserialized) = T::retrieve_cookie(cookie.value().to_string()) {
                     Outcome::Success(
                         AuthCont {
                             // Performance: find a way to remove the to_string()
                             cookie: cookie_deserialized,
+                            // cookie: <T as authorization::AuthorizeCookie>::CookieType
                         }
                     )
                 } else {

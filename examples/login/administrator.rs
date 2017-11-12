@@ -38,6 +38,8 @@ impl CookieId for AdministratorForm {
 } 
 
 impl AuthorizeCookie for AdministratorCookie {
+    type CookieType = AdministratorCookie;
+    
     /// The store_cookie() method should contain code that
     /// converts the specified data structure into a string
     /// 
@@ -51,7 +53,7 @@ impl AuthorizeCookie for AdministratorCookie {
     fn store_cookie(&self) -> String {
         String::from("This is my cooky")
     }
-    fn retrieve_cookie(string: String) -> Option<Self> {
+    fn retrieve_cookie(string: String) -> Option<Self::CookieType> {
         Some(
             AdministratorCookie {
                 userid: 66,
