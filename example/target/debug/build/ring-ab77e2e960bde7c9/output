@@ -1,0 +1,530 @@
+CARGO_FEATURE_DEFAULT: 1
+USR_DIR: C:\laragon\usr
+PROCESSOR_REVISION: 8e09
+RUSTUP_HOME: C:\Users\Andrew\.rustup
+HOMEPATH: \Users\Andrew
+CARGO_CFG_TARGET_VENDOR: pc
+CARGO_PKG_VERSION_MAJOR: 0
+CARGO_CFG_WINDOWS: 
+USERPROFILE: C:\Users\Andrew
+PROCESSOR_ARCHITECTURE: AMD64
+TMP: C:\Users\Andrew\AppData\Local\Temp
+PUBLIC: C:\Users\Public
+CONEMUPID: 9748
+CONEMUPALETTE: Monokai
+CARGO_MAKEFLAGS: --jobserver-fds=__rust_jobserver_semaphore_2112594806 --jobserver-auth=__rust_jobserver_semaphore_2112594806
+CONEMUDRAWHWND: 0x00FA03CE
+TARGET: x86_64-pc-windows-msvc
+SYSTEMDRIVE: C:
+ANSICON: 131x10000 (131x32)
+=C:: C:\code\lang\Rust\proj\rocket-auth-login\example
+CARGO_MANIFEST_DIR: C:\Users\Andrew\.cargo\registry\src\github.com-1ecc6299db9ec823\ring-0.11.0
+COMMONPROGRAMW6432: C:\Program Files\Common Files
+CONEMUBACKHWND: 0x00A1071A
+=EXITCODE: 00000065
+OS: Windows_NT
+CARGO_FEATURE_DEV_URANDOM_FALLBACK: 1
+ONEDRIVE: C:\Users\Andrew\OneDrive
+PROCESSOR_IDENTIFIER: Intel64 Family 6 Model 142 Stepping 9, GenuineIntel
+ANSICON_DEF: 7
+PROMPT: CLINK $P$G
+RUSTC: rustc
+USERDOMAIN_ROAMINGPROFILE: VISHUS-LAPTOP
+CONEMUDRIVE: C:
+HOME: C:\Users\Andrew
+LARAGON_ROOT: C:\laragon\
+CARGO_PKG_NAME: ring
+CARGO: \\?\C:\Users\Andrew\.rustup\toolchains\nightly-x86_64-pc-windows-msvc\bin\cargo.exe
+CONEMUWORKDIR: C:\Users\Andrew
+GIT_INSTALL_ROOT: C:\laragon\bin\cmder\..\git
+CARGO_CFG_DEBUG_ASSERTIONS: 
+CONEMUCONFIG: 
+LOCALAPPDATA: C:\Users\Andrew\AppData\Local
+CARGO_HOME: C:\Users\Andrew\.cargo
+RUSTUP_TOOLCHAIN: nightly-x86_64-pc-windows-msvc
+CARGO_CFG_TARGET_HAS_ATOMIC: 16,32,64,8,ptr
+CONEMUHOOKS: Enabled
+CONEMUDIR: C:\laragon\bin\cmder\vendor\conemu-maximus5
+CONEMUANSILOG: 
+DEBUG: true
+USERNAME: Andrew
+CARGO_MANIFEST_LINKS: ring-asm
+CARGO_CFG_TARGET_ENDIAN: little
+CONEMUHWND: 0x00480BA6
+CARGO_CFG_TARGET_POINTER_WIDTH: 64
+PATH: C:\code\lang\Rust\proj\rocket-auth-login\example\target\debug\deps;C:\Users\Andrew\.cargo\bin;C:\Users\Andrew\.rustup\toolchains\nightly-x86_64-pc-windows-msvc\bin;C:\Users\Andrew\AppData\Local\Yarn\config\global\node_modules\.bin;C:\Users\Andrew\AppData\Roaming\npm;C:\Users\Andrew\AppData\Roaming\Composer\vendor\bin;C:\laragon\bin\mysql\mariadb-10.2.3-win32\bin;C:\laragon\bin\php\php-7.1.1-Win32-VC14-x86;C:\laragon\bin\composer;C:\laragon\bin\apache\httpd-2.4.25-win32-VC14\bin;C:\laragon\bin\redis\redis-x64-3.2.100;C:\laragon\bin\memcached\memcached-1.4.5;C:\laragon\bin\nodejs;C:\laragon\bin\yarn\bin;C:\laragon\bin\notepad++;C:\laragon\bin\telnet;C:\laragon\bin\ngrok;C:\laragon\bin\sendmail;C:\laragon\bin\winscp;C:\laragon\bin\git\bin;C:\laragon\bin\git\cmd;C:\laragon\bin\git\usr\bin;C:\laragon\bin\git\mingw32\bin;C:\laragon\bin;C:\laragon\usr\bin;C:\laragon\bin\putty;;C:\laragon\bin\cmder\bin;C:\laragon\bin\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\laragon\bin\cmder\vendor\conemu-maximus5;C:\laragon\bin\cmder\vendor\conemu-maximus5\ConEmu;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Haskell\bin;C:\Program Files\Haskell Platform\8.0.2\lib\extralibs\bin;C:\Program Files\Haskell Platform\8.0.2\bin;C:\Program Files\Python36\;C:\Program Files\Git\usr\bin;C:\cygwin64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Haskell Platform\8.0.2\mingw\bin;C:\PortableApps\cmds;C:\HashiCorp\Vagrant\bin;C:\Program Files\PuTTY\;C:\Program Files\nodejs\;C:\laragon\bin\php\php-7.1.1-Win32-VC14-x86;C:\laragon\bin\composer;C:\laragon\bin\yarn\bin;C:\Program Files\Python36\Scripts;C:\Program Files\PostgreSQL\10\lib;C:\Program Files (x86)\GnuWin32\bin;C:\Users\Andrew\scoop\shims;C:\Users\Andrew\AppData\Local\Yarn\config\global\node_modules\.bin;C:\Users\Andrew\AppData\Roaming\npm;C:\Users\Andrew\AppData\Roaming\Composer\vendor\bin;C:\laragon\bin\mysql\mariadb-10.2.3-win32\bin;C:\laragon\bin\php\php-7.1.1-Win32-VC14-x86;C:\laragon\bin\composer;C:\laragon\bin\apache\httpd-2.4.25-win32-VC14\bin;C:\laragon\bin\redis\redis-x64-3.2.100;C:\laragon\bin\memcached\memcached-1.4.5;C:\laragon\bin\nodejs;C:\laragon\bin\yarn\bin;C:\laragon\bin\notepad++;C:\laragon\bin\telnet;C:\laragon\bin\ngrok;C:\laragon\bin\sendmail;C:\laragon\bin\winscp;C:\laragon\bin\git\bin;C:\laragon\bin\git\cmd;C:\laragon\bin\git\usr\bin;C:\laragon\bin\git\mingw32\bin;C:\laragon\bin;C:\laragon\usr\bin;C:\laragon\bin\putty;C:\laragon\bin\cmder\bin;C:\laragon\bin\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\Users\Andrew\AppData\Local\Yarn\config\global\node_modules\.bin;C:\Users\Andrew\AppData\Roaming\npm;C:\Users\Andrew\AppData\Roaming\Composer\vendor\bin;C:\laragon\bin\mysql\mariadb-10.2.3-win32\bin;C:\laragon\bin\php\ph;C:\Program Files\Proman;C:\Users\Andrew\.cargo\bin;C:\Program Files\Microsoft VS Code\bin;C:\Exercism;C:\laragon\bin\git\usr\bin;C:\laragon\bin\git\usr\share\vim\vim74;C:\laragon\bin\cmder\;
+CARGO_CFG_TARGET_ARCH: x86_64
+VERBOSE-OUTPUT: 0 
+CARGO_CFG_TARGET_THREAD_LOCAL: 
+SVN_SSH: C:\\laragon\\bin\\git\\bin\\ssh.exe
+DOCUMENT_ROOT: C:\code\www
+CMDER_ROOT: C:\laragon\bin\cmder
+COMMONPROGRAMFILES: C:\Program Files\Common Files
+CARGO_CFG_PROC_MACRO: 
+OPT_LEVEL: 0
+PROFILE: debug
+ARCHITECTURE: 64
+PATHEXT: .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW;.RB;.RBW
+CONEMUWORKDRIVE: C:
+CONEMUSERVERPID: 11516
+CARGO_FEATURE_USE_HEAP: 1
+CARGO_PKG_VERSION_PRE: 
+APPDATA: C:\Users\Andrew\AppData\Roaming
+PROGRAMDATA: C:\ProgramData
+PROGRAMFILES(X86): C:\Program Files (x86)
+PROGRAMW6432: C:\Program Files
+RUSTDOC: rustdoc
+OPENSSL_CONF: C:\laragon\bin\apache\httpd-2.4.25-win32-VC14\conf\openssl.cnf
+LOGONSERVER: \\VISHUS-LAPTOP
+USER-ALIASES: C:\laragon\bin\cmder\config\user-aliases.cmd
+HOST: x86_64-pc-windows-msvc
+CARGO_CFG_TARGET_FEATURE: sse,sse2
+ALLUSERSPROFILE: C:\ProgramData
+VBOX_MSI_INSTALL_PATH: C:\Program Files\Oracle\VirtualBox\
+CARGO_CFG_TARGET_OS: windows
+ALIASES: C:\laragon\bin\cmder\config\user-aliases.cmd
+CARGO_PKG_AUTHORS: Brian Smith <brian@briansmith.org>
+CARGO_CFG_TARGET_FAMILY: windows
+RUST_RECURSION_COUNT: 1
+=EXITCODEASCII: e
+COMSPEC: C:\Windows\system32\cmd.exe
+USER_DIR: C:\laragon\usr
+CARGO_PKG_VERSION: 0.11.0
+CONEMUBUILD: 170402
+PSMODULEPATH: C:\Program Files (x86)\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules;C:\Program Files (x86)\AutoIt3\AutoItX;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\PowerShell\Modules\
+NUMBER_OF_PROCESSORS: 4
+USERDOMAIN: VISHUS-LAPTOP
+VS140COMNTOOLS: C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\
+RP: 1
+COMPUTERNAME: VISHUS-LAPTOP
+OUT_DIR: C:\code\lang\Rust\proj\rocket-auth-login\example\target\debug\build\ring-ab77e2e960bde7c9\out
+SYSTEMROOT: C:\Windows
+PLINK_PROTOCOL: ssh
+CONEMUBASEDIR: C:\laragon\bin\cmder\vendor\conemu-maximus5\ConEmu
+TEMP: C:\Users\Andrew\AppData\Local\Temp
+CARGO_PKG_HOMEPAGE: 
+CONEMUARGS2: 
+CONEMUTASK: {cmd::Cmder}
+CONEMUANSI: ON
+COMMONPROGRAMFILES(X86): C:\Program Files (x86)\Common Files
+PROCESSOR_LEVEL: 6
+CARGO_PKG_VERSION_MINOR: 11
+STACK_ROOT: C:\sr
+PROGRAMFILES: C:\Program Files
+NUM_JOBS: 4
+CARGO_PKG_DESCRIPTION: Safe, fast, small crypto using Rust.
+WINDIR: C:\Windows
+CARGO_CFG_TARGET_ENV: msvc
+FLDR: rustproj
+HOMEDRIVE: C:
+LD_LIBRARY_PATH: C:\Users\Andrew\.rustup\toolchains\nightly-x86_64-pc-windows-msvc\lib
+TERM: cygwin
+CONEMUARGS: /Icon "C:\laragon\bin\cmder\icons\cmder.ico" /Title Cmder
+CARGO_PKG_VERSION_PATCH: 0
+SESSIONNAME: Console
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+TARGET = Some("x86_64-pc-windows-msvc")
+DEBUG = Some("true")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\constant_time_test.obj" "crypto/constant_time_test.c"
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\aes.obj" "crypto/aes/aes.c"
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\generic.obj" "crypto/bn/generic.c"
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\ecp_nistz256.obj" "crypto/ec/ecp_nistz256.c"
+aes.c
+constant_time_test.c
+generic.c
+ecp_nistz256.c
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\bn.obj" "crypto/bn/bn.c"
+running: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\lib.exe" "/OUT:C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\libring-test.a" "/nologo" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\constant_time_test.obj"
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\montgomery.obj" "crypto/bn/montgomery.c"
+bn.c
+montgomery.c
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\exponentiation.obj" "crypto/bn/exponentiation.c"
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\montgomery_inv.obj" "crypto/bn/montgomery_inv.c"
+exponentiation.c
+exit code: 0
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+cargo:rustc-link-lib=static=ring-test
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\gfp_p256.obj" "crypto/ec/gfp_p256.c"
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\mem.obj" "crypto/mem.c"
+montgomery_inv.c
+mem.c
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\shift.obj" "crypto/bn/shift.c"
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+gfp_p256.c
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\mul.obj" "crypto/bn/mul.c"
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\gcm.obj" "crypto/modes/gcm.c"
+shift.c
+mul.c
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\gfp_p384.obj" "crypto/ec/gfp_p384.c"
+gcm.c
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\e_aes.obj" "crypto/cipher/e_aes.c"
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\limbs.obj" "crypto/limbs/limbs.c"
+gfp_p384.c
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\cpu-intel.obj" "crypto/cpu-intel.c"
+e_aes.c
+limbs.c
+cpu-intel.c
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\crypto.obj" "crypto/crypto.c"
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\x25519-x86_64.obj" "crypto/curve25519/x25519-x86_64.c"
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\curve25519.obj" "crypto/curve25519/curve25519.c"
+OPT_LEVEL = Some("0")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CC_x86_64-pc-windows-msvc = None
+CC_x86_64_pc_windows_msvc = None
+HOST_CC = None
+CC = None
+TARGET = Some("x86_64-pc-windows-msvc")
+HOST = Some("x86_64-pc-windows-msvc")
+CFLAGS_x86_64-pc-windows-msvc = None
+CFLAGS_x86_64_pc_windows_msvc = None
+HOST_CFLAGS = None
+CFLAGS = None
+DEBUG = Some("true")
+running "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\cl.exe" "/nologo" "/MD" "/Z7" "/I" "include" "/GS" "/Gy" "/EHsc" "/GR-" "/Zc:wchar_t" "/Zc:forScope" "/Zc:inline" "/Zc:rvalueCast" "/sdl" "/Wall" "/WX" "/wd4127" "/wd4464" "/wd4514" "/wd4710" "/wd4711" "/wd4820" "/Od" "/RTCsu" "/W4" "-c" "/FoC:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\ecp_nistz.obj" "crypto/ec/ecp_nistz.c"
+x25519-x86_64.c
+crypto.c
+curve25519.c
+ecp_nistz.c
+running: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\BuildTools\\VC\\Tools\\MSVC\\14.10.25017\\bin\\HostX64\\x64\\lib.exe" "/OUT:C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\libring-core.a" "/nologo" "C:\\Users\\Andrew\\.cargo\\registry\\src\\github.com-1ecc6299db9ec823\\ring-0.11.0\\pregenerated\\aes-x86_64-nasm.obj" "C:\\Users\\Andrew\\.cargo\\registry\\src\\github.com-1ecc6299db9ec823\\ring-0.11.0\\pregenerated\\aesni-x86_64-nasm.obj" "C:\\Users\\Andrew\\.cargo\\registry\\src\\github.com-1ecc6299db9ec823\\ring-0.11.0\\pregenerated\\bsaes-x86_64-nasm.obj" "C:\\Users\\Andrew\\.cargo\\registry\\src\\github.com-1ecc6299db9ec823\\ring-0.11.0\\pregenerated\\vpaes-x86_64-nasm.obj" "C:\\Users\\Andrew\\.cargo\\registry\\src\\github.com-1ecc6299db9ec823\\ring-0.11.0\\pregenerated\\x86_64-mont-nasm.obj" "C:\\Users\\Andrew\\.cargo\\registry\\src\\github.com-1ecc6299db9ec823\\ring-0.11.0\\pregenerated\\x86_64-mont5-nasm.obj" "C:\\Users\\Andrew\\.cargo\\registry\\src\\github.com-1ecc6299db9ec823\\ring-0.11.0\\pregenerated\\chacha-x86_64-nasm.obj" "C:\\Users\\Andrew\\.cargo\\registry\\src\\github.com-1ecc6299db9ec823\\ring-0.11.0\\pregenerated\\ecp_nistz256-x86_64-nasm.obj" "C:\\Users\\Andrew\\.cargo\\registry\\src\\github.com-1ecc6299db9ec823\\ring-0.11.0\\pregenerated\\p256-x86_64-asm-nasm.obj" "C:\\Users\\Andrew\\.cargo\\registry\\src\\github.com-1ecc6299db9ec823\\ring-0.11.0\\pregenerated\\aesni-gcm-x86_64-nasm.obj" "C:\\Users\\Andrew\\.cargo\\registry\\src\\github.com-1ecc6299db9ec823\\ring-0.11.0\\pregenerated\\ghash-x86_64-nasm.obj" "C:\\Users\\Andrew\\.cargo\\registry\\src\\github.com-1ecc6299db9ec823\\ring-0.11.0\\pregenerated\\poly1305-x86_64-nasm.obj" "C:\\Users\\Andrew\\.cargo\\registry\\src\\github.com-1ecc6299db9ec823\\ring-0.11.0\\pregenerated\\sha512-x86_64-nasm.obj" "C:\\Users\\Andrew\\.cargo\\registry\\src\\github.com-1ecc6299db9ec823\\ring-0.11.0\\pregenerated\\sha256-x86_64-nasm.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\aes.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\bn.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\exponentiation.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\generic.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\montgomery.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\montgomery_inv.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\mul.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\shift.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\e_aes.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\crypto.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\curve25519.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\ecp_nistz.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\ecp_nistz256.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\gfp_p256.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\gfp_p384.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\limbs.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\mem.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\gcm.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\cpu-intel.obj" "C:\\code\\lang\\Rust\\proj\\rocket-auth-login\\example\\target\\debug\\build\\ring-ab77e2e960bde7c9\\out\\x25519-x86_64.obj"
+exit code: 0
+cargo:rustc-link-lib=static=ring-core
+cargo:rustc-link-search=native=C:\code\lang\Rust\proj\rocket-auth-login\example\target\debug\build\ring-ab77e2e960bde7c9\out
