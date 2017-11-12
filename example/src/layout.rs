@@ -1,4 +1,12 @@
 
+//! Note this layout module is not a very good strategy
+//! using the rocket_contrib Templates is heavily recommended
+//! for anything besides simple applications.
+//! 
+//! For instance, if you later decide to add any kind of privilege based
+//! menu system or conditionally display information, like generation time
+//! or even a custom title, Handlebars templates is a good solution. Try it.
+
 use rocket::response::content::Html;
 
 use auth::sanitization::*;

@@ -11,25 +11,19 @@ extern crate regex;
 extern crate time;
 extern crate titlecase;
 extern crate htmlescape;
-
+#[allow(unused_imports)] #[macro_use] extern crate serde_json;
 // #[macro_use] extern crate lazy_static;
-// #[macro_use] extern crate serde_json;
+extern crate rocket_auth_login as auth;
 
-// use rocket::{Request, Data, Outcome, Response};
+use auth::authorization::*;
 use rocket::response::{NamedFile, Redirect, Flash};
 use rocket::response::content::Html;
 use rocket::request::{FlashMessage, Form};
 use rocket::http::{Cookie, Cookies};
 use std::path::{Path, PathBuf};
 
-extern crate rocket_auth_login as auth;
-
-use auth::authorization::*;
-// use auth::sanitization::*;
-
 mod administrator;
 mod layout;
-
 use administrator::*;
 use layout::*;
 
@@ -119,6 +113,10 @@ fn index(admin_opt: Option<AdministratorCookie>, flash_msg_opt: Option<FlashMess
     layout(&contents)
 }
 
+/// static_files() is needed to serve css/js/font files
+/// all static files should be placed in a folder, ex. static
+/// this prevents directory traversal attacks but still
+/// allows static files to be served easily
 #[get("/<file..>", rank=10)]
 fn static_files(file: PathBuf) -> Option<NamedFile> {
     NamedFile::open(Path::new("static/").join(file)).ok()

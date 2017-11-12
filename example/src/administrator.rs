@@ -51,17 +51,26 @@ impl AuthorizeCookie for AdministratorCookie {
     ///
     /// MsgPack
     fn store_cookie(&self) -> String {
-        String::from("This is my cooky")
+        // String::from("This is my cooky")
+        // let ser = ::serde_json::to_string(self).expect("Could not serialize");
+        ::serde_json::to_string(self).expect("Could not serialize")
     }
     #[allow(unused_variables)]
     fn retrieve_cookie(string: String) -> Option<Self::CookieType> {
-        Some(
-            AdministratorCookie {
-                userid: 66,
-                username: "andrew".to_string(),
-                display: Some("Andrew Prindle".to_string()),
-            }
-        )
+        let mut des_buf = string.clone();
+        let des: Result<AdministratorCookie, _> = ::serde_json::from_str(&mut des_buf);
+        if let Ok(cooky) = des {
+            Some(cooky)
+        } else {
+            None
+        }
+        // Some(
+        //     AdministratorCookie {
+        //         userid: 66,
+        //         username: "andrew".to_string(),
+        //         display: Some("Andrew Prindle".to_string()),
+        //     }
+        // )
     }
 }
 
