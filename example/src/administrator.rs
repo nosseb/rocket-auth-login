@@ -1,6 +1,7 @@
 
 use rocket::{Request, Outcome};
 use rocket::request::FromRequest;
+use std::collections::HashMap;
 // use rocket::{Request, Data, Outcome, Response};
 // use rocket::http::{Cookie, Cookies, MediaType, ContentType, Status, RawStr};
 // use rocket::request::{FlashMessage, Form, FromRequest,FromForm, FormItems, FromFormValue, FromParam};
@@ -38,7 +39,7 @@ impl CookieId for AdministratorForm {
 } 
 
 impl AuthorizeCookie for AdministratorCookie {
-    type CookieType = AdministratorCookie;
+    // type CookieType = AdministratorCookie;
     
     /// The store_cookie() method should contain code that
     /// converts the specified data structure into a string
@@ -69,7 +70,8 @@ impl AuthorizeCookie for AdministratorCookie {
     /// MsgPack is a binary format, and while not human readable is more
     /// compact and efficient.
     #[allow(unused_variables)]
-    fn retrieve_cookie(string: String) -> Option<Self::CookieType> {
+    // fn retrieve_cookie(string: String) -> Option<Self::CookieType> {
+    fn retrieve_cookie(string: String) -> Option<Self> {
         let mut des_buf = string.clone();
         let des: Result<AdministratorCookie, _> = ::serde_json::from_str(&mut des_buf);
         if let Ok(cooky) = des {
@@ -109,7 +111,7 @@ impl AuthorizeForm for AdministratorForm {
     }
     
     /// Create a new login form instance
-    fn new_form(user: &str, pass: &str) -> Self {
+    fn new_form(user: &str, pass: &str, _extras: Option<HashMap<String, String>>) -> Self {
         AdministratorForm {
             username: user.to_string(),
             password: pass.to_string(),
