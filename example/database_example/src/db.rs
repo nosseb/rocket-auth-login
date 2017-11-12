@@ -21,7 +21,7 @@ use postgres::params::{ConnectParams, Host};
 use std::ops::Deref;
 use std;
 use std::env;
-// use dotenv::dotenv;
+use dotenv::dotenv;
 
 use super::PGCONN;
 
@@ -96,13 +96,13 @@ impl Deref for DbConn {
 }
 
 
-pub fn establish_connection() -> Connection {
-    dotenv().ok();
-    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-    // PgConnection::establish(&database_url).expect("Error connecting to {}", database_url);
-    // Connection::connect("postgres://postgres@localhost:5433", TlsMode::None).unwrap()
-    Connection::connect(database_url, postgres::TlsMode::None).unwrap()
-}
+// pub fn establish_connection() -> Connection {
+//     dotenv().ok();
+//     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+//     // PgConnection::establish(&database_url).expect("Error connecting to {}", database_url);
+//     // Connection::connect("postgres://postgres@localhost:5433", TlsMode::None).unwrap()
+//     Connection::connect(database_url, postgres::TlsMode::None).unwrap()
+// }
 // pub fn establish_connection_dotenv() -> Connection {
 //     dotenv().ok();
 //     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
@@ -110,10 +110,10 @@ pub fn establish_connection() -> Connection {
 // }
 
 
-pub fn get_connection() -> Connection {
-    let conn = PGCONN.lock().unwrap();
-    conn
-}
+// pub fn get_connection() -> Connection {
+//     let conn = PGCONN.lock().unwrap();
+//     conn
+// }
 
 
 

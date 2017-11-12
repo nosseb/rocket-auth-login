@@ -12,8 +12,12 @@ extern crate time;
 extern crate titlecase;
 extern crate htmlescape;
 #[allow(unused_imports)] #[macro_use] extern crate serde_json;
-// #[macro_use] extern crate lazy_static;
+#[macro_use] extern crate lazy_static;
 extern crate rocket_auth_login as auth;
+extern crate postgres;
+extern crate r2d2;
+extern crate r2d2_postgres;
+extern crate dotenv;
 
 use auth::authorization::*;
 use rocket::response::{NamedFile, Redirect, Flash};
@@ -21,12 +25,14 @@ use rocket::response::content::Html;
 use rocket::request::{FlashMessage, Form};
 use rocket::http::{Cookie, Cookies};
 
-use r2d2;
-use r2d2_postgres;
+
+// use r2d2;
+// use r2d2_postgres;
 use r2d2_postgres::{PostgresConnectionManager, TlsMode};
 use postgres::Connection;
-use postgres;
+// use postgres;
 
+use std::sync::Mutex;
 use std::path::{Path, PathBuf};
 
 mod administrator;
@@ -45,8 +51,39 @@ lazy_static! {
     static ref PGCONN: Mutex<DbConn> = Mutex::new( DbConn(init_pg_pool().get().expect("Could not connect to database.")) );
 }
 
+/// The `logged_in()` method queries the database for the username specified
+/// in the cookie.  In this instance all of the data in the database is also
+/// contained in the cookie, making a database operation unnecessary, however
+/// this is just an example to show how to connect to a database.
 #[get("/login", rank = 1)]
-fn logged_in(_user: AuthCont<AdministratorCookie>) -> Html<String> {
+fn logged_in(_user: AuthCont<AdministratorCookie>, conn: DbConn) -> Html<String> {
+    let admin: AdministratorCookie = _user.cookie;
+    let qrystr = format!("SELECT userid, username, display FROM users WHERE username = '{}'", admin.username);
+    let user_data_qry = conn.query(&qrystr, &[]);
+    let mut output = match user_data_qry {
+        Ok(qry) => {
+            if !qry.is_empty() && qry.len() == 1 {
+                let row = qry.get(0);
+                let display_opt = row.get_opt(2);
+                let display = match display_opt {
+                    Some(Ok(d)) => Some(d),
+                    _ => None,
+                };
+                let user_results = AdministratorCookie {
+                    userid: row.get(0),
+                    username: row.get(1),
+                    // the display field is null so use get_opt to get a result, which unwraps to a string
+                    // display: row.get_opt(2).unwrap_or(Ok(String::new())).unwrap_or(String::new()),
+                    display: display,
+                };
+                format!("Welcome. Your info is:<br>\nId: {}<br>\nUsername: {}<br>\nDisplay name: {}", 
+                    user_results.userid, user_results.username, user_results.display.unwrap_or(String::from("no display name")))
+            } else {
+                String::from("Could not retrieve the user from the database.")
+            }
+        },
+        Err(err) => String::from("Could not query the database."),
+    };
     layout("You are logged in.")
 }
 #[get("/login", rank = 2)]
@@ -109,7 +146,7 @@ fn logout(admin: Option<AdministratorCookie>, mut cookies: Cookies) -> Result<Fl
 
 
 #[get("/")]
-fn index(admin_opt: Option<AdministratorCookie>, flash_msg_opt: Option<FlashMessage>) -> Html<String> {
+fn index(admin_opt: Option<AdministratorCookie>, flash_msg_opt: Option<FlashMessage>, conn: DbConn) -> Html<String> {
     let mut contents = String::with_capacity(300);
     if let Some(flash) = flash_msg_opt {
         match flash.name() {
