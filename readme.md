@@ -1,5 +1,9 @@
+% Rocket-auth-login - Authentication and Login library for Rust's Rocket Framework
+
 # Rocket Authentication / Login
 Rocket-auth-login is a simple authnetication crate that provides some help creating and using user types.
+
+The rocket-auth-login crate was inspired by the rocket-simpleauth crate.  The rocket-simpleauth crate however proved to be too simple for my purposes.  I needed more flexibility in redirecting users as well as the ability to easily define multiple user types, like an Admin user or Regular user.  
 
 For example you could create a regular User type and an elevated Admin type.  This crate defines three main traits that are used with two different custom types.
 

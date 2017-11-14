@@ -236,12 +236,14 @@ pub trait AuthorizeCookie : CookieId {
 ///         }
 ///     }
 ///     
-///     
-///     
-///     
+///     # fn main() {}
 ///     
 /// ```
 /// 
+/// # Example Code
+/// For more detailed example please see the example directory.
+/// The example directory contains a fully working example of processing
+/// and checking login information.
 /// 
 
 pub trait AuthorizeForm : CookieId {
@@ -335,14 +337,15 @@ impl<T: AuthorizeCookie + Clone> AuthCont<T> {
 /// Request guard for the AuthCont (Authentication Container).
 /// This allows a route to call a user type like:
 /// 
-/// ```
+/// ```rust,no_run
 /// 
 ///     use auth::authorization::*;
 ///     # use administration:*;
 ///     use rocket;
 ///     #[get("/protected")]
-///     fn protected(container: AuthCont<AdministratorCookie>) -> {
-///         
+///     fn protected(container: AuthCont<AdministratorCookie>) -> Html<String> {
+///         let admin = container.cookie;
+///         String::new()
 ///     }
 ///     
 ///     # fn main() {
