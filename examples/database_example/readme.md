@@ -12,7 +12,7 @@ Run the login_database.sql in the database example root.  If that fails recreate
 * Table name: **users**
 
 | Column Name | Data Type | Length | Null | Primary Key |
-|----------------------------|
+|-------------|-----------|-------|------|--------------|
 | userid | Serial* | | Not Null | Primary Key |
 | username | Character Varying | 30 | Not Null | |
 | display | Character Varying | 60 | Nullable | |
