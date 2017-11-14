@@ -26,10 +26,13 @@ use rocket::request::{FlashMessage, Form};
 use rocket::http::{Cookie, Cookies};
 
 
-// use r2d2;
-// use r2d2_postgres;
 use r2d2_postgres::{PostgresConnectionManager, TlsMode};
 use postgres::Connection;
+
+// These use statements are not needed here but
+// may be convenient to have in other modules
+// use r2d2;
+// use r2d2_postgres;
 // use postgres;
 
 use std::sync::Mutex;
@@ -46,7 +49,11 @@ use db::*;
 const URL: &'static str = "http://localhost:8000";
 const LOGIN_URL: &'static str = "http://localhost:8000/login";
 
-
+// The lazy_static crate requires that global static references be wrapped in a mutex
+/// The PGCONN global is used to make database connections available 
+/// anywhere inside the program.  The main use in this example is to
+/// allow the authenticate() method to access a database connection
+/// without a database connection being passed into it.
 lazy_static! {
     static ref PGCONN: Mutex<DbConn> = Mutex::new( DbConn(init_pg_pool().get().expect("Could not connect to database.")) );
 }
@@ -64,16 +71,17 @@ fn logged_in(_user: AuthCont<AdministratorCookie>, conn: DbConn) -> Html<String>
         Ok(qry) => {
             if !qry.is_empty() && qry.len() == 1 {
                 let row = qry.get(0);
+                
+                // the display field is null so use get_opt to get a result, which unwraps to a string
                 let display_opt = row.get_opt(2);
                 let display = match display_opt {
                     Some(Ok(d)) => Some(d),
                     _ => None,
                 };
+                
                 let user_results = AdministratorCookie {
                     userid: row.get(0),
                     username: row.get(1),
-                    // the display field is null so use get_opt to get a result, which unwraps to a string
-                    // display: row.get_opt(2).unwrap_or(Ok(String::new())).unwrap_or(String::new()),
                     display: display,
                 };
                 format!("Welcome. Your info is:<br>\nId: {}<br>\nUsername: {}<br>\nDisplay name: {}", 
@@ -85,7 +93,6 @@ fn logged_in(_user: AuthCont<AdministratorCookie>, conn: DbConn) -> Html<String>
         Err(err) => String::from("Could not query the database."),
     };
     layout(&output)
-    // layout("You are logged in.")
 }
 #[get("/login", rank = 2)]
 fn login() -> Html<String> {
@@ -176,15 +183,8 @@ fn static_files(file: PathBuf) -> Option<NamedFile> {
 
 fn main() {
         rocket::ignite()
-        
         .manage(db::init_pg_pool())
-        
-        // .attach(Template::fairing())
-        
-        // If using a database connection:
-        // .manage(data::init_pg_pool())
-        
-        // use rocket_contrib's Templates
+        // If using rocket_contrib's Templates
         // .attach(Template::fairing())
         .mount("/", routes![
             logged_in,

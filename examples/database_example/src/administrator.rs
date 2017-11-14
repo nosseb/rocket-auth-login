@@ -2,11 +2,6 @@
 use rocket::{Request, Outcome};
 use rocket::request::FromRequest;
 use std::collections::HashMap;
-// use rocket::{Request, Data, Outcome, Response};
-// use rocket::http::{Cookie, Cookies, MediaType, ContentType, Status, RawStr};
-// use rocket::request::{FlashMessage, Form, FromRequest,FromForm, FormItems, FromFormValue, FromParam};
-// use rocket::response::{content, NamedFile, Redirect, Flash, Responder, Content};
-// use rocket::response::content::Html;
 
 use super::PGCONN;
 use auth::authorization::*;
@@ -40,8 +35,6 @@ impl CookieId for AdministratorForm {
 } 
 
 impl AuthorizeCookie for AdministratorCookie {
-    // type CookieType = AdministratorCookie;
-    
     /// The store_cookie() method should contain code that
     /// converts the specified data structure into a string
     /// 
@@ -54,8 +47,6 @@ impl AuthorizeCookie for AdministratorCookie {
     /// MsgPack is a binary format, and while not human readable is more
     /// compact and efficient.
     fn store_cookie(&self) -> String {
-        // String::from("This is my cooky")
-        // let ser = ::serde_json::to_string(self).expect("Could not serialize");
         ::serde_json::to_string(self).expect("Could not serialize")
     }
     
@@ -71,7 +62,6 @@ impl AuthorizeCookie for AdministratorCookie {
     /// MsgPack is a binary format, and while not human readable is more
     /// compact and efficient.
     #[allow(unused_variables)]
-    // fn retrieve_cookie(string: String) -> Option<Self::CookieType> {
     fn retrieve_cookie(string: String) -> Option<Self> {
         let mut des_buf = string.clone();
         let des: Result<AdministratorCookie, _> = ::serde_json::from_str(&mut des_buf);
@@ -80,13 +70,6 @@ impl AuthorizeCookie for AdministratorCookie {
         } else {
             None
         }
-        // Some(
-        //     AdministratorCookie {
-        //         userid: 66,
-        //         username: "andrew".to_string(),
-        //         display: Some("Andrew Prindle".to_string()),
-        //     }
-        // )
     }
 }
 
@@ -118,13 +101,6 @@ impl AuthorizeForm for AdministratorForm {
                 });
             }
         }
-        // let username_qry = conn.query(&is_user_qrystr, &[])
-        // match conn.query(&is_user_qrystr, &[]) {
-        //     Ok(q) => return Err(AuthFail::new(self.username.clone(), "Username was not found.".to_string()));,
-        //     Err(_) => return Err(AuthFail::new(self.username.clone(), "Username was not found.".to_string()));,
-        //     _ => {},
-        // }
-        // if username_qry.is_err() {
         if let Ok(eqry) = conn.query(&is_user_qrystr, &[]) {
             if eqry.is_empty() || eqry.len() == 0 {
                 return Err(AuthFail::new(self.username.clone(), "Username was not found.".to_string()));
@@ -144,21 +120,6 @@ impl AuthorizeForm for AdministratorForm {
             }
         }
         Err(AuthFail::new(self.username.clone(), "Unkown error..".to_string()))
-        
-        // println!("Authenticating {} with password: {}", &self.username, &self.password);
-        // if &self.username == "administrator" && &self.password != "" {
-        //     Ok(
-        //         AdministratorCookie {
-        //             userid: 1,
-        //             username: "administrator".to_string(),
-        //             display: Some("Administrator".to_string()),
-        //         }
-        //     )
-        // } else {
-        //     Err(
-        //         AuthFail::new(self.username.to_string(), "Incorrect username".to_string())
-        //     )
-        // }
     }
     
     /// Create a new login form instance
