@@ -74,6 +74,7 @@ impl Deref for DbConn {
     }
 }
 
+
 // Non-shared-state database connection examples
 // The dotenv crate is used to store an env var called DATABASE_URL in a .env file
 // which is then loaded into the environmental variables.

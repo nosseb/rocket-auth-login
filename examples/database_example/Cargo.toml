@@ -1,11 +1,13 @@
 [package]
 name = "rocket-auth-login-database"
-version = "1.0.0"
+version = "1.1.0"
 authors = ["Andrew Prindle <prindle.andrew@gmail.com>"]
 
 [dependencies]
+argon2rs = "0.2.5"
 dotenv = "0.10.1"
 htmlescape = "0.3.1"
+rand = "0.3.18"
 lazy_static = "0.2.8"
 regex = "0.2.2"
 rmp-serde = "0.13.7"

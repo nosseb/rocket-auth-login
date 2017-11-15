@@ -9,6 +9,8 @@ extern crate serde;
 extern crate rmp_serde as rmps;
 extern crate regex;
 extern crate time;
+extern crate rand;
+extern crate argon2rs;
 extern crate titlecase;
 extern crate htmlescape;
 #[allow(unused_imports)] #[macro_use] extern crate serde_json;
@@ -39,9 +41,11 @@ use std::sync::Mutex;
 use std::path::{Path, PathBuf};
 
 mod administrator;
+mod password;
 mod layout;
 mod db;
 use administrator::*;
+use password::*;
 use layout::*;
 use db::*;
 

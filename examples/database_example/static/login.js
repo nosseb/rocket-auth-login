@@ -12,14 +12,15 @@
                     event.stopPropagation();
                 } else {
                     $("button[type=submit]").attr("disabled", "disabled");
-                    var pwd1 = document.getElementById("passwordField");
-                    var pwd2 = document.getElementById("passwordHidden");
-                    if (pwd1 && pwd2) {
-                        pwd1.style.display = 'none';
-                        pwd2.style.display = 'block';
-                        var hashed = Sha256.hash(pwd1.value);
-                        pwd1.value = hashed;
-                    }
+                    // Removed code to hash the password
+                    // var pwd1 = document.getElementById("passwordField");
+                    // var pwd2 = document.getElementById("passwordHidden");
+                    // if (pwd1 && pwd2) {
+                    //     pwd1.style.display = 'none';
+                    //     pwd2.style.display = 'block';
+                    //     var hashed = Sha256.hash(pwd1.value);
+                    //     pwd1.value = hashed;
+                    // }
                 }
                 form.classList.add('was-validated');
             }, false);
@@ -43,15 +44,6 @@ function StartText() {
 }
 
 
-function checkTags() {
-    var tagform = document.forms.insert_form.elements["tags"];
-    var tagmsg = document.getElementById("tag-msg");
-    if (tagform.value.indexOf(' ') != -1 && tagform.value.indexOf(',') == -1) {
-        tagmsg.style.display = "block";
-    } else {
-        tagmsg.style.display = "none";
-    }
-}
 
 
 

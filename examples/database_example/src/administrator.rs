@@ -2,8 +2,10 @@
 use rocket::{Request, Outcome};
 use rocket::request::FromRequest;
 use std::collections::HashMap;
+use std::str::{from_utf8};
 
 use super::PGCONN;
+use password::*;
 use auth::authorization::*;
 // use auth::sanitization::*;
 
@@ -19,7 +21,8 @@ pub struct AdministratorCookie {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AdministratorForm {
     pub username: String,
-    pub password: String,
+    // pub password: &'b [u8],
+    pub password: Vec<u8>,
 }
 
 impl CookieId for AdministratorCookie {
@@ -79,12 +82,20 @@ impl AuthorizeForm for AdministratorForm {
     /// Authenticate the credentials inside the login form
     fn authenticate(&self) -> Result<Self::CookieType, AuthFail> {
         let conn = PGCONN.lock().unwrap();
-        let qrystr = format!("SELECT userid, username, display FROM users WHERE username = '{}' AND password = '{}' AND is_admin = '1'", &self.username, &self.password);
+        let authstr = format!(r#"
+            SELECT u.userid, u.username, u.display FROM users u WHERE u.username = '{username}' AND 
+                u.pass = convert_to(
+                crypt(
+                    '{password}', convert_from(u.salt, 'LATIN1')
+                )
+            , 'LATIN1')"#, username=&self.username, password=from_utf8(&self.password).unwrap_or(""));
+        // let qrystr = format!("SELECT userid, username, display,  FROM users WHERE username = '{}' AND password = '{}' AND is_admin = '1'", &self.username, &self.password);
         let is_user_qrystr = format!("SELECT userid FROM users WHERE username = '{}'", &self.username);
         let is_admin_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND is_admin = '1'", &self.username);
-        let password_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND password = '{}'", &self.username, &self.password);
-        println!("Attempting query: {}", qrystr);
-        if let Ok(qry) = conn.query(&qrystr, &[]) {
+        let password_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND password = '{}'", &self.username, from_utf8(&self.password).unwrap_or(""));
+        println!("Attempting query: {}", authstr);
+        // if let Ok(qry) = conn.query(&qrystr, &[]) {
+        if let Ok(qry) = conn.query(&authstr, &[]) {
             if !qry.is_empty() && qry.len() == 1 {
                 let row = qry.get(0);
                 
@@ -119,14 +130,17 @@ impl AuthorizeForm for AdministratorForm {
                 return Err(AuthFail::new(self.username.clone(), "Invalid username / password combination.".to_string()));
             }
         }
-        Err(AuthFail::new(self.username.clone(), "Unkown error..".to_string()))
+        Err(AuthFail::new(self.username.clone(), "Unknown error..".to_string()))
     }
     
     /// Create a new login form instance
-    fn new_form(user: &str, pass: &str, _extras: Option<HashMap<String, String>>) -> Self {
+    // fn new_form(user: &str, pass: &[u8], _extras: Option<HashMap<String, String>>) -> Self {
+    fn new_form(user: &str, pass: Vec<u8>, _extras: Option<HashMap<String, String>>) -> Self {
         AdministratorForm {
             username: user.to_string(),
-            password: pass.to_string(),
+            // password: pass.to_string(),
+            // password: pass_vec(pass),
+            password: pass,
         }
     }
     
