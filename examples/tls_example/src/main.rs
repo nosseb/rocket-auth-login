@@ -27,7 +27,7 @@ use rocket::response::content::Html;
 use rocket::request::{FlashMessage, Form};
 use rocket::http::{Cookie, Cookies};
 
-
+use std::time::Instant;
 use r2d2_postgres::{PostgresConnectionManager, TlsMode};
 use postgres::Connection;
 
@@ -68,6 +68,7 @@ lazy_static! {
 /// this is just an example to show how to connect to a database.
 #[get("/login", rank = 1)]
 fn logged_in(_user: AuthCont<AdministratorCookie>, conn: DbConn) -> Html<String> {
+    let start = Instant::now();
     let admin: AdministratorCookie = _user.cookie;
     let qrystr = format!("SELECT userid, username, display FROM users WHERE username = '{}'", admin.username);
     let user_data_qry = conn.query(&qrystr, &[]);
@@ -96,7 +97,11 @@ fn logged_in(_user: AuthCont<AdministratorCookie>, conn: DbConn) -> Html<String>
         },
         Err(err) => String::from("Could not query the database."),
     };
-    layout(&output)
+    let out = layout(&output);
+    
+    let end = start.elapsed();
+    println!("Served in {}.{:08} seconds", end.as_secs(), end.subsec_nanos());
+    out
 }
 #[get("/login", rank = 2)]
 fn login() -> Html<String> {
@@ -109,6 +114,8 @@ fn login() -> Html<String> {
 /// and the login screen with user filled in
 #[get("/login?<user>")]
 fn retry_login_user(user: UserQuery, flash_msg_opt: Option<FlashMessage>) -> Html<String> {
+    let start = Instant::now();
+    
     let login_form = layout_retry_form(LOGIN_URL, &user.user);
     let alert;
     if let Some(flash) = flash_msg_opt {
@@ -120,8 +127,11 @@ fn retry_login_user(user: UserQuery, flash_msg_opt: Option<FlashMessage>) -> Htm
     contents.push_str(&alert);
     contents.push_str("\n");
     contents.push_str(&login_form);
-    layout(&contents)
+    let output = layout(&contents);
     
+    let end = start.elapsed();
+    println!("Served in {}.{:08} seconds", end.as_secs(), end.subsec_nanos());
+    output
 }
 
 /// if there is a flash message but no user query string
@@ -141,9 +151,15 @@ fn retry_login_flash(flash_msg: FlashMessage) -> Html<String> {
 #[allow(unused_mut)]
 #[post("/login", data = "<form>")]
 fn process_login(form: Form<LoginCont<AdministratorForm>>, mut cookies: Cookies) -> Result<Redirect, Flash<Redirect>> {
+    let start = Instant::now();
+    
     let inner = form.into_inner();
     let login = inner.form;
-    login.flash_redirect("/login", "/login", cookies)
+    let output = login.flash_redirect("/login", "/login", cookies);
+    
+    let end = start.elapsed();
+    println!("Served in {}.{:08} seconds", end.as_secs(), end.subsec_nanos());
+    output
 }
 
 #[get("/logout")]

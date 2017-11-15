@@ -1,9 +1,6 @@
 
 # Global configuration of TLS:
 # [global.tls]
-# certs = "c:/code/lang/rust/proj/rocket-auth-login/examples/tls_example/private/certs.pem"
-# key = "c:/code/lang/rust/proj/rocket-auth-login/examples/tls_example/private/key.pem"
-# [global.tls]
 # certs = "private\\certs.pem"
 # key = "private\\key.pem"
 
@@ -18,4 +15,8 @@ tls = { certs = "c:\\code\\lang\\rust\\proj\\rocket-auth-login\\examples\\tls_ex
 
 
 
-
+# Per Environment Configuration of TLS:
+# [development]
+# tls = { certs = "private\\certs.pem", key = "private\\key.pem" }
+# [production]
+# tls = { certs = "private\\certs.pem", key = "private\\key.pem" }
