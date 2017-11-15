@@ -309,6 +309,31 @@ pub trait AuthorizeForm : CookieId {
         }
     }
     
+    /// Sanitizes the username before storing in the login form structure.
+    /// The default implementation uses the `sanitize()` function in the
+    /// `sanitization` module.  This can be overriden in your 
+    /// `impl AuthorizeForm for {login structure}` implementation to
+    /// customize how the text is cleaned/sanitized.
+    fn clean_username(string: &str) -> String {
+        sanitize(string)
+    }
+    /// Sanitizes the password before storing in the login form structure.
+    /// The default implementation uses the `sanitize_oassword()` function in the
+    /// `sanitization` module.  This can be overriden in your 
+    /// `impl AuthorizeForm for {login structure}` implementation to
+    /// customize how the text is cleaned/sanitized.
+    fn clean_password(string: &str) -> String {
+        sanitize_password(string)
+    }
+    /// Sanitizes any extra variables before storing in the login form structure.
+    /// The default implementation uses the `sanitize()` function in the
+    /// `sanitization` module.  This can be overriden in your 
+    /// `impl AuthorizeForm for {login structure}` implementation to
+    /// customize how the text is cleaned/sanitized.
+    fn clean_extras(string: &str) -> String {
+        sanitize(string)
+    }
+    
     /// Redirect the user to one page on successful authentication or
     /// another page if authentication fails.
     fn redirect(&self, ok_redir: &str, err_redir: &str, mut cookies: Cookies) -> Result<Redirect, Redirect> {
@@ -414,15 +439,18 @@ impl<'f, A: AuthorizeForm> FromForm<'f> for LoginCont<A> {
         for (key,value) in form_items {
             match key.as_str(){
                 "username" => {
-                    user = sanitize(&value.url_decode().unwrap_or(String::new()));
+                    // user = sanitize(&value.url_decode().unwrap_or(String::new()));
+                    user = A::clean_username(&value.url_decode().unwrap_or(String::new()));
                 },
                 "password" => {
-                    pass = sanitize_password(&value.url_decode().unwrap_or(String::new()));
+                    // pass = sanitize_password(&value.url_decode().unwrap_or(String::new()));
+                    pass = A::clean_password(&value.url_decode().unwrap_or(String::new()));
                     // pass = value.bytes().collect();
                 },
                 // _ => {},
                 a => {
-                    extras.insert( a.to_string(), sanitize( &value.url_decode().unwrap_or(String::new()) ) );
+                    // extras.insert( a.to_string(), sanitize( &value.url_decode().unwrap_or(String::new()) ) );
+                    extras.insert( a.to_string(), A::clean_extras( &value.url_decode().unwrap_or(String::new()) ) );
                 },
             }
         }
