@@ -71,7 +71,7 @@ fn logged_in(_user: AuthCont<AdministratorCookie>, conn: DbConn) -> Html<String>
     let admin: AdministratorCookie = _user.cookie;
     let qrystr = format!("SELECT userid, username, display FROM users WHERE username = '{}'", admin.username);
     let user_data_qry = conn.query(&qrystr, &[]);
-    let mut output = match user_data_qry {
+    let output = match user_data_qry {
         Ok(qry) => {
             if !qry.is_empty() && qry.len() == 1 {
                 let row = qry.get(0);

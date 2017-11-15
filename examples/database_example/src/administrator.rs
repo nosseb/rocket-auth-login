@@ -23,7 +23,7 @@ pub struct AdministratorCookie {
 pub struct AdministratorForm {
     pub username: String,
     // pub password: &'b [u8],
-    pub password: Vec<u8>,
+    pub password: String,
 }
 
 impl CookieId for AdministratorCookie {
@@ -89,11 +89,13 @@ impl AuthorizeForm for AdministratorForm {
                 crypt(
                     '{password}', convert_from(u.salt, 'LATIN1')
                 )
-            , 'LATIN1')"#, username=&self.username, password=sanitize_password(from_utf8(&self.password).unwrap_or("")));
+            , 'LATIN1')"#, username=&self.username, password=&self.password);
+            // , 'LATIN1')"#, username=&self.username, password=sanitize_password(from_utf8(&self.password).unwrap_or("")));
         // let qrystr = format!("SELECT userid, username, display,  FROM users WHERE username = '{}' AND password = '{}' AND is_admin = '1'", &self.username, &self.password);
         let is_user_qrystr = format!("SELECT userid FROM users WHERE username = '{}'", &self.username);
         let is_admin_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND is_admin = '1'", &self.username);
-        let password_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND password = '{}'", &self.username, from_utf8(&self.password).unwrap_or(""));
+        let password_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND password = '{}'", &self.username, &self.password);
+        // let password_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND password = '{}'", &self.username, from_utf8(&self.password).unwrap_or(""));
         println!("Attempting query: {}", authstr);
         // if let Ok(qry) = conn.query(&qrystr, &[]) {
         if let Ok(qry) = conn.query(&authstr, &[]) {
@@ -136,12 +138,12 @@ impl AuthorizeForm for AdministratorForm {
     
     /// Create a new login form instance
     // fn new_form(user: &str, pass: &[u8], _extras: Option<HashMap<String, String>>) -> Self {
-    fn new_form(user: &str, pass: Vec<u8>, _extras: Option<HashMap<String, String>>) -> Self {
+    // fn new_form(user: &str, pass: Vec<u8>, _extras: Option<HashMap<String, String>>) -> Self {
+    fn new_form(user: &str, pass: &str, _extras: Option<HashMap<String, String>>) -> Self {
         AdministratorForm {
             username: user.to_string(),
-            // password: pass.to_string(),
-            // password: pass_vec(pass),
-            password: pass,
+            password: pass.to_string(),
+            // password: pass,
         }
     }
     
