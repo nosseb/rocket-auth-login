@@ -27,8 +27,8 @@ pub fn sanitize_text(string: &str) -> String {
 /// Passwords must be only hex characters as it is expecting a hash, like sha-256 or md5 for example
 pub fn sanitize_password(string: &str) -> String {
     lazy_static! {
-        static ref SANITARY_PASSWORD: Regex = Regex::new(r#"^[A-Za-Z0-9+_\.!@#$%^&\(\)-={}:;?/]+$"#).unwrap();
-        static ref SANITIZE_PASSWORD: Regex = Regex::new(r#"[^A-Za-Z0-9+_\.!@#$%^&\(\)-={}:;?/]+"#).unwrap();
+        static ref SANITARY_PASSWORD: Regex = Regex::new(r#"^[A-Za-z0-9]+$"#).unwrap();
+        static ref SANITIZE_PASSWORD: Regex = Regex::new(r#"[^A-Za-z0-9]+"#).unwrap();
     }
     if SANITARY_PASSWORD.is_match(string) {
         string.to_string()
