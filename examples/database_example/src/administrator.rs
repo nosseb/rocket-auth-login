@@ -7,6 +7,7 @@ use std::str::{from_utf8};
 use super::PGCONN;
 use password::*;
 use auth::authorization::*;
+use auth::sanitization::*;
 // use auth::sanitization::*;
 
 /// The AdministratorCookie type is used to indicate a user has logged in as an administrator
@@ -88,7 +89,7 @@ impl AuthorizeForm for AdministratorForm {
                 crypt(
                     '{password}', convert_from(u.salt, 'LATIN1')
                 )
-            , 'LATIN1')"#, username=&self.username, password=from_utf8(&self.password).unwrap_or(""));
+            , 'LATIN1')"#, username=&self.username, password=sanitize_password(from_utf8(&self.password).unwrap_or("")));
         // let qrystr = format!("SELECT userid, username, display,  FROM users WHERE username = '{}' AND password = '{}' AND is_admin = '1'", &self.username, &self.password);
         let is_user_qrystr = format!("SELECT userid FROM users WHERE username = '{}'", &self.username);
         let is_admin_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND is_admin = '1'", &self.username);
