@@ -91,7 +91,7 @@ impl AuthorizeForm for AdministratorForm {
             SELECT u.userid, u.username, u.display FROM users u WHERE u.username = '{username}' AND 
                 u.pass = convert_to(
                 crypt(
-                    '{password}', convert_from(u.salt, 'LATIN1')
+                    ('{password}' || u.salt), convert_from(u.salt, 'LATIN1')
                 )
             , 'LATIN1')"#, username=&self.username, password=&self.password);
             // , 'LATIN1')"#, username=&self.username, password=sanitize_password(from_utf8(&self.password).unwrap_or("")));
