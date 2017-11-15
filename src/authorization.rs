@@ -262,7 +262,14 @@ pub trait AuthorizeForm : CookieId {
     /// and then optionally a HashMap containing any extra fields.
     /// 
     /// Must be implemented on the login form structure
-    fn new_form(&str, &str, Option<HashMap<String, String>>) -> Self;
+    ///
+    // /// The password is a u8 slice, allowing passwords to be stored without
+    // /// being converted to hex.  The slice is sufficient because new_form()
+    // /// is called within the from_form() function, so when the password is
+    // /// collected as a vector of bytes the reference to those bytes are sent
+    // /// to the new_form() method.
+    // fn new_form(&str, &str, Option<HashMap<String, String>>) -> Self;
+    fn new_form(&str, Vec<u8>, Option<HashMap<String, String>>) -> Self;
     
     /// The `fail_url()` method is used to create a url that the user is sent
     /// to when the authentication fails.  The default implementation
@@ -400,7 +407,9 @@ impl<'f, A: AuthorizeForm> FromForm<'f> for LoginCont<A> {
     fn from_form(form_items: &mut FormItems<'f>, _strict: bool) -> Result<Self, Self::Error> {
         // let mut user_pass = HashMap::new();
         let mut user: String = String::new();
-        let mut pass: String = String::new();
+        // let mut pass: String = String::new();
+        let mut pass: Vec<u8> = Vec::new();
+        
         let mut extras: HashMap<String, String> = HashMap::new();
         for (key,value) in form_items {
             match key.as_str(){
@@ -408,7 +417,8 @@ impl<'f, A: AuthorizeForm> FromForm<'f> for LoginCont<A> {
                     user = sanitize(&value.url_decode().unwrap_or(String::new()));
                 },
                 "password" => {
-                    pass = sanitize_password(&value.url_decode().unwrap_or(String::new()));
+                    // pass = sanitize_password(&value.url_decode().unwrap_or(String::new()));
+                    pass = value.bytes().collect();
                 },
                 // _ => {},
                 a => {
@@ -422,9 +432,9 @@ impl<'f, A: AuthorizeForm> FromForm<'f> for LoginCont<A> {
         Ok(
             LoginCont {
                 form: if extras.len() == 0 {
-                          A::new_form(&user, &pass, None)
+                          A::new_form(&user, pass, None)
                        } else {
-                           A::new_form(&user, &pass, Some(extras))
+                           A::new_form(&user, pass, Some(extras))
                        },
             }
         )
