@@ -4,6 +4,9 @@ version = "0.5.0"
 authors = ["Andrew Prindle <prindle.andrew@gmail.com>"]
 
 [dependencies]
+# unic-ucd-category = "0.6.0"
+# unic-ucd = "0.6.0"
+unic-ucd = "0.6.0"
 htmlescape = "0.3.1"
 lazy_static = "0.2.8"
 regex = "0.2.2"

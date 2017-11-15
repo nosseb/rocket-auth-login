@@ -7,7 +7,19 @@
 --         )
 --     , 'LATIN1')
 
+-- Create a new user
 INSERT INTO users (username, display, password, is_admin, pass, salt) VALUES (
     'andrew', 'Andrew Prindle', 'password', true,
     convert_to('password', 'LATIN1'), convert_to(gen_salt('bf'), 'LATIN1')
 )
+
+-- View salts and password hashes for all users
+SELECT encode(u.pass, 'hex') as pass, encode(u.salt, 'hex') as salt FROM users u
+
+-- Update salt for all users
+UPDATE users SET salt = convert_to(gen_salt('bf'), 'LATIN1')
+
+-- Set password for all users
+UPDATE users SET pass = 'password';
+
+

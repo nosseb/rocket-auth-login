@@ -98,7 +98,9 @@ impl AuthorizeForm for AdministratorForm {
         // let qrystr = format!("SELECT userid, username, display,  FROM users WHERE username = '{}' AND password = '{}' AND is_admin = '1'", &self.username, &self.password);
         let is_user_qrystr = format!("SELECT userid FROM users WHERE username = '{}'", &self.username);
         let is_admin_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND is_admin = '1'", &self.username);
-        let password_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND password = '{}'", &self.username, &self.password);
+        // let password_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND password = '{}'", &self.username, &self.password);
+        let password_qrystr = format!("SELECT u.userid FROM users u WHERE u.username = '{}' AND 
+            u.pass = convert_to( crypt( ('{}' || u.salt), convert_from(u.salt, 'LATIN1') ), 'LATIN1' )", &self.username, &self.password);
         // let password_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND password = '{}'", &self.username, from_utf8(&self.password).unwrap_or(""));
         println!("Attempting query: {}", authstr);
         // if let Ok(qry) = conn.query(&qrystr, &[]) {

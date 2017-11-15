@@ -22,6 +22,15 @@
 //! dashboard for example or upon failure a retry login page.
 //! 
 
+/* Todo:
+    Add a trait that will provide sanitization
+        The trait will have default methods that call
+        the basic sanitization methods in the sanitization module
+        but can be overloaded when using in other crates to allow
+        more customized security.
+
+*/
+
 #![feature(custom_derive)]
 #![feature(plugin)]
 #![plugin(rocket_codegen)]
@@ -29,6 +38,8 @@
 extern crate rocket;
 extern crate regex;
 #[macro_use] extern crate lazy_static;
+// extern crate unic_ucd_category;
+extern crate unic_ucd;
 
 extern crate htmlescape;
 pub mod authorization;

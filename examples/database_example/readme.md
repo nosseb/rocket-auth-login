@@ -18,6 +18,8 @@ Run the login_database.sql in the database example root.  If that fails recreate
 | display | Character Varying | 60 | Nullable | |
 | password | Character Varying | 64 | Not Null | |
 | is_admin | boolean | | Not Null | |
+| pass | bytea | | Not Null | |
+| salt | bytea | | Not Null | |
 
 
 
