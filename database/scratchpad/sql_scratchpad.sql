@@ -22,4 +22,17 @@ UPDATE users SET salt = convert_to(gen_salt('bf'), 'LATIN1')
 -- Set password for all users
 UPDATE users SET pass = 'password';
 
+-- --------------------------------- --
+
+UPDATE users SET pass_salt = gen_salt('bf')
+
+UPDATE users SET pass_hash = 'password'
+
+
+
+
+
+
+
+
 

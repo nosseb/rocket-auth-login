@@ -45,7 +45,19 @@ impl<T: AuthorizeForm + Clone> LoginCont<T> {
     }
 }
 
+
+/// The CookieId trait contains a single method, `cookie_id()`.
+/// The `cookie_id()` function returns the name or id of the cookie.
+/// Note: if you have another cookie of the same name that is secured
+/// that already exists (say created by running the tls_example then database_example)
+/// if your cookies have the same name it will not work.  This is because
+/// if the existing cookie is set to secured you attempt to login without
+/// using tls the cookie will not work correctly and login will fail.
 pub trait CookieId {
+    /// Ensure `cookie_id()` does not conflict with other cookies that
+    /// may be set using secured when not using tls.  Secured cookies
+    /// will only work usnig tls and cookies of the same name could
+    /// create problems.
     fn cookie_id<'a>() -> &'a str {
         "sid"
     }
@@ -146,9 +158,6 @@ pub trait CookieId {
 /// 
 
 pub trait AuthorizeCookie : CookieId {
-    // /// CookieType is the data type that will hold the cookie information
-    // type CookieType: AuthorizeCookie;
-    
     /// Serialize the cookie data type - must be implemented by cookie data type
     fn store_cookie(&self) -> String;
     
@@ -269,7 +278,6 @@ pub trait AuthorizeForm : CookieId {
     // /// collected as a vector of bytes the reference to those bytes are sent
     // /// to the new_form() method.
     fn new_form(&str, &str, Option<HashMap<String, String>>) -> Self;
-    // fn new_form(&str, Vec<u8>, Option<HashMap<String, String>>) -> Self;
     
     /// The `fail_url()` method is used to create a url that the user is sent
     /// to when the authentication fails.  The default implementation
@@ -281,6 +289,31 @@ pub trait AuthorizeForm : CookieId {
         output.push_str("?user=");
         output.push_str(user);
         output
+    }
+        
+    /// Sanitizes the username before storing in the login form structure.
+    /// The default implementation uses the `sanitize()` function in the
+    /// `sanitization` module.  This can be overriden in your 
+    /// `impl AuthorizeForm for {login structure}` implementation to
+    /// customize how the text is cleaned/sanitized.
+    fn clean_username(string: &str) -> String {
+        sanitize(string)
+    }
+    /// Sanitizes the password before storing in the login form structure.
+    /// The default implementation uses the `sanitize_oassword()` function in the
+    /// `sanitization` module.  This can be overriden in your 
+    /// `impl AuthorizeForm for {login structure}` implementation to
+    /// customize how the text is cleaned/sanitized.
+    fn clean_password(string: &str) -> String {
+        sanitize_password(string)
+    }
+    /// Sanitizes any extra variables before storing in the login form structure.
+    /// The default implementation uses the `sanitize()` function in the
+    /// `sanitization` module.  This can be overriden in your 
+    /// `impl AuthorizeForm for {login structure}` implementation to
+    /// customize how the text is cleaned/sanitized.
+    fn clean_extras(string: &str) -> String {
+        sanitize(string)
     }
     
     /// Redirect the user to one page on successful authentication or
@@ -307,31 +340,6 @@ pub trait AuthorizeForm : CookieId {
                 Err( Flash::error(Redirect::to(&furl), &fail.msg) )
             },
         }
-    }
-    
-    /// Sanitizes the username before storing in the login form structure.
-    /// The default implementation uses the `sanitize()` function in the
-    /// `sanitization` module.  This can be overriden in your 
-    /// `impl AuthorizeForm for {login structure}` implementation to
-    /// customize how the text is cleaned/sanitized.
-    fn clean_username(string: &str) -> String {
-        sanitize(string)
-    }
-    /// Sanitizes the password before storing in the login form structure.
-    /// The default implementation uses the `sanitize_oassword()` function in the
-    /// `sanitization` module.  This can be overriden in your 
-    /// `impl AuthorizeForm for {login structure}` implementation to
-    /// customize how the text is cleaned/sanitized.
-    fn clean_password(string: &str) -> String {
-        sanitize_password(string)
-    }
-    /// Sanitizes any extra variables before storing in the login form structure.
-    /// The default implementation uses the `sanitize()` function in the
-    /// `sanitization` module.  This can be overriden in your 
-    /// `impl AuthorizeForm for {login structure}` implementation to
-    /// customize how the text is cleaned/sanitized.
-    fn clean_extras(string: &str) -> String {
-        sanitize(string)
     }
     
     /// Redirect the user to one page on successful authentication or
@@ -454,6 +462,9 @@ impl<'f, A: AuthorizeForm> FromForm<'f> for LoginCont<A> {
                 },
             }
         }
+        
+        // println!("Creating login form data structure with:\nUser: {}\nPass: {}\nExtras: {:?}", user, pass, extras);
+        
         // Do not need to check for username / password here,
         // if the authentication method requires them it will
         // fail at that point.

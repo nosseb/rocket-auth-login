@@ -1,109 +1,155 @@
 % Rocket-auth-login - Authentication and Login library for Rust's Rocket Framework
 
-# Rocket Authentication / Login
-Rocket-auth-login is a simple authnetication crate that provides some help creating and using user types.
+# Cargo.toml
+In the cargo.toml add:
 
-The rocket-auth-login crate was inspired by the rocket-simpleauth crate.  The rocket-simpleauth crate however proved to be too simple for my purposes.  I needed more flexibility in redirecting users as well as the ability to easily define multiple user types, like an Admin user or Regular user.  
+```
+    rocket-auth-login = "0.5.*"
+```
 
-For example you could create a regular User type and an elevated Admin type.  This crate defines three main traits that are used with two different custom types.
+# Import and Use Statements
+```
 
-# Custom Data Structures
-There are two data structures that you will have to implement:
+    extern crate rocket_auth_login as auth;
+    use auth::authorization;
+    
+```
 
-## Cookie Data User Type
-The `AuthorizeCookie` trait is used with a custom type that will be stored in the cookie.  The cookie is stored as text so the cookie user type will implement `store_cookie()` and `retrieve_cookie()` methods.  The data structure can hold any information, but will most likely contain the userid/username/email or any other information you wish to have available immediately without having to query a database.  Using Rocket's Private Cookies ensures authenticity so you can be sure the user is an administrator just by adding a request guard for the defined cookie user type.
+# Description
+Rocket-auth-login is a library written in Rust for authentication and login processing.
+
+It provides traits that you will implement on two different custom types that you define in your program.  These traits contain helpful methods to process login form data as well as store and retrieve cookies.  The two custom structures that you will define will do the following:
+
+* ## Store the contents of your login form
+    * This is used to authenticate users' credentials
+* ## Store the contents of the cookie
+    * When authentication is successful this structure will be serialized into a `String` that is stored in a [private cookie](https://api.rocket.rs/rocket/http/enum.Cookies.html#private-cookies)
+    * The cookie data structure can be retrieved through a request guard for the specified user type
+
+# Data Structures
+In your application define two custom data structures that will:
+
+## Login Form Data Structure
 
 ```
 
-    pub struct AdministratorCookie {
-        pub userid: u32,
-        pub username: String,
-        pub display: Option<String>,
-    }
-
-```
-
-## Login Form Data User Type
-The `AuthorizeForm` trait is used with a custom type that stores and authenticates the login data.  It will hold the username and password in most cases.
-
-```
-
+    #[derive(Debug, Clone, Serialize, Deserialize)]    
     pub struct AdministratorForm {
         pub username: String,
         pub password: String,
     }
 ```
 
-# Traits
-## CookieId
-The `cookieId` trait defines a single method, `cookie_id()`.  This method is used to provide the identifier for the cookie.
-
-## AuthorizeCookie
-The `AuthorizeCookie` contains three methods, `store_cookie()`, `retrieve_cookie()`, and `delete_cooke()`.  The first two must be implemented on the cookie user type, the last can be overridden if needed.
+## Cookie Data Structure
 
 ```
-    
 
-    // Replace AdministratorCookie with your cookie user type
-    impl AuthorizeCookie for AdministratorCookie {
-        fn store_cookie(&self) -> String {
-            ::serde_json::to_string(self).expect("Could not serialize")
-        }
-    
-        fn retrieve_cookie(string: String) -> Option<Self::CookieType> {
-            let mut des_buf = string.clone();
-            let des: Result<AdministratorCookie, _> = ::serde_json::from_str(&mut des_buf);
-            if let Ok(cooky) = des {
-                Some(cooky)
-            } else {
-                None
-            }
+    #[derive(Debug, Clone, Serialize, Deserialize)]
+    pub struct AdministratorCookie {
+        pub userid: u32,
+        pub username: String,
+        pub display: Option<String>,
+    }
+```
+
+# Implement Traits
+The trait `CookieId` is implemented by both data structures. the `AuthorizeForm` trait is implemented by only the login data structure while the `AuthorizeCookie` trait is implemented by the cookie data structure.  For a more thorough example look at the `administrator.rs` file in any of the examples.
+
+## CookieId
+**Each** data structure will must implement the `CookieId` trait.  The `cookie_id()` implementation should be the same for both data structures since the two will have the same cookie identifier (the login form data structure will create the cookie with the specified cookie identifier while the cookie data structure will read the cookie associated with the specified identifier).  It is a simple trait with only a single method.  The implementation for  `cookide_id()` method looks like:
+
+```
+
+    // Both structures will use the same code for the `CookieId`
+    impl CookieId for {StructNameHere} {
+        fn cookie_id<'a>() -> &'a str {
+            "acid"
         }
     }
 ```
 
+## AuthorizeCookie
+The `AuthorizeCookie` trait defines methods for the cookie data structure.  There are two functions you must implement on the cookie data structure, as well as a thrid function `delete_cookie()` which has a default implementation that deletes the private cookie with the name specified by `CookieId::cookie_id()`.  The functions you must implement on the cookie data structure are:
+
+* `store_cookie(&self) -> String`
+    * Serialized a cookie data structure into a string to be stored in the private cookie
+* `retrieve_cookie(String) -> Self`
+    * Deserializes a cookie data structure from a string that the cookie contained
+
 ## AuthorizeForm
-The `AuthorizeForm` trait contains two important methods: `authenticate()` and `new_form()`.  `authenticate(&self) -> Result<Self::CookieType, AuthFail>` is used to authenticate submitted form data
+The `AuthorizeForm` trait defines several methods which are implemented on the login form data structure, only two of which must be implemented in your code.  The rest are optional.  Also the associated type `CookieType` should be set to the cookie data structure type
 
 ```
 
     impl AuthorizeForm for AdministratorForm {
         type CookieType = AdministratorCookie;
-        
-        fn authenticate(&self) -> Result<Self::CookieType, AuthFail> {
-            println!("Authenticating {} with password: {}", &self.username, &self.password);
-            if &self.username == "administrator" && &self.password != "" {
-                Ok(
-                    AdministratorCookie {
-                        userid: 1,
-                        username: "administrator".to_string(),
-                        display: Some("Administrator".to_string()),
-                    }
-                )
-            } else {
-                Err(
-                    AuthFail::new(self.username.to_string(), "Incorrect username".to_string())
-                )
-            }
-        }
-        
-        fn new_form(user: &str, pass: &str) -> Self {
-            AdministratorForm {
-                username: user.to_string(),
-                password: pass.to_string(),
-            }
-        }
-    }
 ```
 
-# Example
-The example directory contains a fully working example.   There are only really two files of importance, main.rs (which calls and demonstrates use of the custom user structures) and administrator.rs (which defines the custom user structures). The three rust files that used are:
+Required: 
 
-- main.rs - calls rocket, adds some routes
-- administrator.rs - defines the `AdministratorCookie` and `AdministratorForm` structures
-- layout.rs - adds some basic HTML layout functions.  This is just for demonstration to make the example work, in a more complicated example Rocket_contrib's Templates would be used.
+* ### `fn authenticate(&self) -> Result<Self::CookieType, AuthFail>`
+    * Takes a login form data structure via the `&self` parameter
+    * Returns either
+        * `Ok( CookieType )` where `CookieType` is replaced by the cookie data structure
+        * Err( AuthFail::new(attempted_username.to_string(), reason_auth_failed.to_string()) )
+* ### `fn new_form(&str, &str, Option<HashMap<String, String>>) -> Self`
+    * Creates a new instance of the login form data structure from the submitted form data.  This method is called from the `FromForm` implementation on the `LoginCont` structure (which the container used to store the login form data structure, see the Routes example below).  The parameters are:
+        1. Username - comes from an input field named `username`
+        2. Password - comes from an input field named `password`
+        3. Extras - An Option<HashMap<String, String>> which contains every form field other than `username` and `password`.  This is used when the username and password fields have different names (then `authenticate()` can look at the fields in the extras hashmap instead of the regular username and password fields) or when other fields are needed in the login form.
 
-There are also css and javascript files used to style and add javascript form validation as well as sha-256 hashing of the password (as used in this example; if SSL is not being used it is better to hash the password then to send it as plain text).
+Optional (can be overridden): 
+
+* `fn flash_redirect(&self, ok_redir: &str, err_redir: &str, mut cookies: Cookies) -> Result<Redirect, Flash<Redirect>>`
+    * Call the `authenticate()` method and if successful creates the private cookie to log the user in.  Redirects the user to the `ok_redir` page on successful authentication.  If authentication fails it calls the fail_url() to build a query string which is appended to `err_redir` (this allows the username to persist and be filled in inside the login form) and also sets a [FlashMessage](https://api.rocket.rs/rocket/response/struct.Flash.html) (a cookie that is deleted once read) indicating why the form failed
+* `fn redirect(&self, ok_redir: &str, err_redir: &str, mut cookies: Cookies) -> Result<Redirect, Redirect>`
+    * Same as `flash_redirect()` except it does not set a Flashmessage, it only redirects to either the ok_redir page or err_redir page (with the query string returned by `fail_url()` appended)
+* `fn fail_url(user: &str) -> String`
+    * Creates a query string that is appended to the url to indicate the username the user attempted to login with.  The default implementation creates the following string: "?user={username}" where {username} is the specified username
+* `fn clean_username(string: &str) -> String`
+    * Sanitizes the username.  By default it uses the `sanitize()` method from the `sanitization` module (sanitization.rs)
+* `fn clean_password(string: &str) -> String`
+    * Sanitizes the password.  By default it uses the `sanitize_password()` method from the `sanitization` module (sanitization.rs)
+* `fn clean_extras(string: &str) -> String`
+     Sanitizes the any extra fields.  By default it uses the `sanitize()` method from the `sanitization` module (sanitization.rs)
 
 
+
+# Multiple User Types
+It is possible and fairly simple to add multiple user types, like an administartor and a regular user type.
+To accomplish this simply two data structures for each type (a login form data structure and a cookie data structure) and define different cookie identifiers for each user type (the admin type may have `cookie_id()` return something like `"aid"` while the user type may return something similar to `"uid"`).
+
+# Routes
+In your routes you will use the cookie data type as a request guard (ensuring that the user viewing the page is logged in as the specified user type).  A route that uses the `AdministratorCookie` type looks like:
+
+```
+
+    #[get("/login", rank = 1)]
+    fn logged_in(_user: AuthCont<AdministratorCookie>) -> Html<String> {
+        let admin: AdministratorCookie = _user.cookie;
+        Html( format!("Welcome {}, you are logged in as an administrator.", admin.username) )
+    }
+    // OR to use the type directly
+    fn logged_in(admin: AdministratorCookie
+
+```
+
+
+# Login Form Processing
+The login processing route will be a `post` route that 
+
+```
+
+    #[allow(unused_mut)]
+    #[post("/login", data = "<form>")]
+    fn process_login(form: Form<LoginCont<AdministratorForm>>, mut cookies: Cookies) -> Result<Redirect, Flash<Redirect>> {
+        let inner = form.into_inner();
+        let login = inner.form;
+        login.flash_redirect("/login", "/login", cookies)
+    }
+]
+
+
+**Copyright Note**: the design in the examples was created by me.  You can use it however if you put in at least an HTML comment inside the HTML output saying Design &copy; 2017 Andrew Prindle.
+The rest of the application you may use without any kind of credit displayed to users but must follow the terms of the Apache 2.0 license.
 

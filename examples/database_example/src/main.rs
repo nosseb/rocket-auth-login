@@ -67,6 +67,9 @@ lazy_static! {
 /// contained in the cookie, making a database operation unnecessary, however
 /// this is just an example to show how to connect to a database.
 #[get("/login", rank = 1)]
+// the route function could either use admin: AdministratorCookie or
+// _user: AuthCont<AdministratorCookie> and then use: let admin = _user.cookie;
+// fn logged_in(admin: AdministratorCookie, conn: DbConn) -> Html<String> {
 fn logged_in(_user: AuthCont<AdministratorCookie>, conn: DbConn) -> Html<String> {
     let admin: AdministratorCookie = _user.cookie;
     let qrystr = format!("SELECT userid, username, display FROM users WHERE username = '{}'", admin.username);

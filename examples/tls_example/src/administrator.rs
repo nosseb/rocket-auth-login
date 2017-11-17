@@ -89,18 +89,13 @@ impl AuthorizeForm for AdministratorForm {
         let conn = PGCONN.lock().unwrap();
         let authstr = format!(r#"
             SELECT u.userid, u.username, u.display FROM users u WHERE u.username = '{username}' AND 
-                u.pass = convert_to(
-                crypt(
-                    ('{password}' || u.salt), convert_from(u.salt, 'LATIN1')
-                )
-            , 'LATIN1')"#, username=&self.username, password=&self.password);
+                u.salt_hash = crypt('{password}', u.salt_hash)"#, username=&self.username, password=&self.password);
             // , 'LATIN1')"#, username=&self.username, password=sanitize_password(from_utf8(&self.password).unwrap_or("")));
         // let qrystr = format!("SELECT userid, username, display,  FROM users WHERE username = '{}' AND password = '{}' AND is_admin = '1'", &self.username, &self.password);
         let is_user_qrystr = format!("SELECT userid FROM users WHERE username = '{}'", &self.username);
         let is_admin_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND is_admin = '1'", &self.username);
         // let password_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND password = '{}'", &self.username, &self.password);
-        let password_qrystr = format!("SELECT u.userid FROM users u WHERE u.username = '{}' AND 
-            u.pass = convert_to( crypt( ('{}' || u.salt), convert_from(u.salt, 'LATIN1') ), 'LATIN1' )", &self.username, &self.password);
+        let password_qrystr = format!("SELECT u.userid FROM users u WHERE u.username = '{}' AND u.salt_hash = crypt('{}', u.salt_hash)", &self.username, &self.password);
         // let password_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND password = '{}'", &self.username, from_utf8(&self.password).unwrap_or(""));
         println!("Attempting query: {}", authstr);
         // if let Ok(qry) = conn.query(&qrystr, &[]) {

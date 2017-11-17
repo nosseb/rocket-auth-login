@@ -3,37 +3,47 @@
 # Database Example Setup
 First this particular example uses a postgresql database.  You must have postgresql installed on your machine.
 
-Run the login_database.sql in the database example root.  If that fails recreate the table to match the following:
+## Database Setup Instructions
+1. Go to the directory containing the `create_login.sql` file
+2. Run: `psql postgresql://postgres@localhost` where `postgres@localhost` is the username and host address
+3. Enter your password
+4. Type: `\i create_login.sql` to run the script that will create:
+    * The pgcrypto extension 
+    * The `login` database
+    * A `sequence` for the `userid` auto-incrementing primary key column
+    * A `users` table
+    * A few sample rows, all have the password set to "password".  This includes an admin user.
+    * A `stored procedure` and `trigger` for inserting new users; this is to generate a password salt and hash the password with the generated salt.  The hash and salt (and the hash algorithm) are all stored in the `salt_hash` column, which is a secure way of storing the password.
+    * A `stored procedure` and `trigger` for updating the password hash.
 
-## Login Database
-* Database name: **login**
+```
 
-## Users Table
-* Table name: **users**
+    c:\> cd <directory of create_login.sql>
+    c:\rocket-auth-login\database\> psql postgresql://postgres@localhost
+    Password: <your password>
+    \i create_login.sql
+
+```
+
+
+# **Login** Database
+## Table: Users
 
 | Column Name | Data Type | Length | Null | Primary Key |
 |-------------|-----------|-------|------|--------------|
 | userid | Serial* | | Not Null | Primary Key |
 | username | Character Varying | 30 | Not Null | |
 | display | Character Varying | 60 | Nullable | |
-| password | Character Varying | 64 | Not Null | |
 | is_admin | boolean | | Not Null | |
-| pass | bytea | | Not Null | |
-| salt | bytea | | Not Null | |
+| hash_salt | text | | Not Null | |
 
+The database comes with an administrator user that looks like:
 
-
-
-Notes: * = the userid column is created as a serial data type which makes it auto increment, however it makes the column an integer, which in Rust is (I believe) an i64, and in the example we are using u32.  So after creating the column change the column from an integer to an oid data type which is a u32 in Rust.
-
-
-By default there is one entry:
-
-| Userid | Username | Display| Password | Is Admin |
+| Userid | Username | Display| hash_salt | Is Admin |
 |--------|-----------|---------|----------|-----------|
-| 0  |  admin | Administrator | sha256(password)* | true |
+| 1  |  admin | Administrator | password* | true |
 
-Notes: * = The password for the admin user is stored as a sha-256 hash.  The original text is password.  The actual text stored in this column is:
+Notes: * = The password is stored with a hash and salt using the pgcrypto crypt() function, which stores the algorithm used, the salt, and the hash.  This prevents rainbow table attacks.
 
 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8
 
@@ -41,9 +51,9 @@ Notes: * = The password for the admin user is stored as a sha-256 hash.  The ori
 # Using The Example
 The example is setup with three main routes:
 
-* / - The index page, can be accessed at [http://localhost:8000/](http://localhost:8000/)
-* /login - either displays a login form (or a retry login form) or once logged in displays user information.  Can be accessed at [http://localhost:8000/login](http://localhost:8000/login)
-* /logout - if the user is logged in it removes the private cookie and returns to the login page.  It can be accessed at [http://localhost:8000/logout](http://localhost:8000/logout)
+* **/** - The index page, can be accessed at [http://localhost:8000/](http://localhost:8000/)
+* **/login** - either displays a login form (or a retry login form) or once logged in displays user information.  Can be accessed at [http://localhost:8000/login](http://localhost:8000/login)
+* **/logout** - if the user is logged in it removes the private cookie and returns to the login page.  It can be accessed at [http://localhost:8000/logout](http://localhost:8000/logout)
 
-Copyright Note: the design was created by me.  You can use it however if you do you put in at least an HTML comment inside the HTML output saying Design &copy; 2017 Andrew Prindle.
+**Copyright Note**: the design was created by me.  You can use it however if you put in at least an HTML comment inside the HTML output saying Design &copy; 2017 Andrew Prindle.
 The rest of the application you may use without any kind of credit displayed to users but must follow the terms of the Apache 2.0 license.

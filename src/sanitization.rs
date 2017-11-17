@@ -102,3 +102,8 @@ pub fn sanitize_password(string: &str) -> String {
 
     
 }
+
+
+// assert_eq!(sanitize("andrew"), "andrew".to_string());
+// assert_eq!(sanitize_password("password"), "password".to_string());
+// assert_eq!(sanitize_text("text stuffs"), "text stuffs".to_string());
