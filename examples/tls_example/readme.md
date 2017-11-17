@@ -23,5 +23,6 @@ The example is setup with three main routes:
 * /login - either displays a login form (or a retry login form) or once logged in displays user information.  Can be accessed at [https://localhost:8000/login](https://localhost:8000/login)
 * /logout - if the user is logged in it removes the private cookie and returns to the login page.  It can be accessed at [https://localhost:8000/logout](https://localhost:8000/logout)
 
-**Copyright Note**: the design was created by me.  You can use it however if you put in at least an HTML comment inside the HTML output saying Design &copy; 2017 Andrew Prindle.
+
+**Copyright Note**: The Rocket-auth-login crate and Rust code examples are licensed under the Apache 2.0 license.  However the layout/design in the examples was created by me.  You can use it however if you put in at least an HTML comment inside the HTML output saying Design &copy; 2017 Andrew Prindle.
 The rest of the application you may use without any kind of credit displayed to users but must follow the terms of the Apache 2.0 license.

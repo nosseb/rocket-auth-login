@@ -1,20 +1,43 @@
+
 [package]
 name = "rocket-auth-login"
-version = "0.5.1"
+version = "0.2.0"
 authors = ["Andrew Prindle <prindle.andrew@gmail.com>"]
 
 [dependencies]
 # unic-ucd-category = "0.6.0"
-# unic-ucd = "0.6.0"
 unic-ucd = "0.6.0"
 htmlescape = "0.3.1"
 lazy_static = "0.2.8"
 regex = "0.2.2"
 rocket = "0.3.3"
 rocket_codegen = "0.3.*"
-# rocket-simpleauth = "0.3.*"
-# rocket = "0.3.2"
-# rocket_codegen = "0.3.2"
+
+[package]
+description = "Login and authentication for rocket web apps.  This crate provides functions to process login forms and to deal with private cookies easily."
+
+# documentation = "..."
+
+homepage = "https://github.com/vishusandy/rocket-auth-login"
+
+# relative to root
+readme = "readme.md"
+
+# up to 5 keywords
+keywords = ["auth", "authentication", "login", "rocket", "web"]
+
+ This is a list of up to five categories where this crate would fit.
+# Categories are a fixed list available at crates.io/category_slugs, and
+# they must match exactly.
+categories = ["authentication", "web-programming"]
+
+# This is a string description of the license for this package. Currently
+# crates.io will validate the license provided against a whitelist of known
+# license identifiers from http://spdx.org/licenses/. Multiple licenses can be
+# separated with a `/`.
+license = "Apache-2.0"
 
 
+# exclude = ["build/**/*.o", "doc/**/*.html"]
+exclude = ["database", "examples/**"]
 

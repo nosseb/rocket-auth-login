@@ -18,7 +18,8 @@ In the cargo.toml add:
 # Description
 Rocket-auth-login is a library written in Rust for authentication and login processing.
 
-It provides traits that you will implement on two different custom types that you define in your program.  These traits contain helpful methods to process login form data as well as store and retrieve cookies.  The two custom structures that you will define will do the following:
+### Library
+This crate provides traits that you will implement on two different custom types that you define in your program.  These traits contain helpful methods to process login form data as well as store and retrieve cookies.  The two custom structures that you will define will do the following:
 
 * ## Store the contents of your login form
     * This is used to authenticate users' credentials
@@ -52,7 +53,7 @@ In your application define two custom data structures that will:
     }
 ```
 
-# Implement Traits
+# Trait Implementations
 The trait `CookieId` is implemented by both data structures. the `AuthorizeForm` trait is implemented by only the login data structure while the `AuthorizeCookie` trait is implemented by the cookie data structure.  For a more thorough example look at the `administrator.rs` file in any of the examples.
 
 ## CookieId
@@ -150,6 +151,9 @@ The login processing route will be a `post` route that
 ]
 
 
-**Copyright Note**: the design in the examples was created by me.  You can use it however if you put in at least an HTML comment inside the HTML output saying Design &copy; 2017 Andrew Prindle.
-The rest of the application you may use without any kind of credit displayed to users but must follow the terms of the Apache 2.0 license.
+# Security
+The library will send passwords in plaintext.  It is highly recommended that you use TLS.  There is even an example showing how to use tls with this crate.  The changes are minimal.  If you absolutely need to hash a password before the password is sent the examples all include a sha256.js file from [http://www.movable-type.co.uk/scripts/sha256.html]([http://www.movable-type.co.uk/scripts/sha256.html](http://www.movable-type.co.uk/scripts/sha256.html)) which can be used for that very purpose.  Also the login.js file contains commented out code around line 15 that can be used to hash the password before sending it using the sha256.js file.  This method is extremely discouraged.  Sha hashes are fast, and thus very susceptible to rainbow table attacks.  Without using TLS the security is almost the same as plaintext when using just a hashed password. Use TLS.  [Let's Encrypt](https://letsencrypt.org/)) offers free certificates so there's no reason not to use https for production purposes.
 
+
+**Copyright Note**: The Rocket-auth-login crate and Rust code examples are licensed under the Apache 2.0 license.  However the layout/design in the examples was created by me.  You can use it however if you put in at least an HTML comment inside the HTML output saying Design &copy; 2017 Andrew Prindle.
+The rest of the application you may use without any kind of credit displayed to users but must follow the terms of the Apache 2.0 license.
