@@ -12,19 +12,15 @@
                     event.stopPropagation();
                 } else {
                     $("button[type=submit]").attr("disabled", "disabled");
-                    var pwd1 = document.getElementById("passwordField");
-                    var pwd2 = document.getElementById("passwordHidden");
-                    if (pwd1 && pwd2) {
-                        // Copy the password into the hidden password field
-                        // so when the password field is hidden and the hidden
-                        // one is display the password value appears the same
-                        pwd2.value = pwd1.value;
-                        
-                        pwd1.style.display = 'none';
-                        pwd2.style.display = 'block';
-                        var hashed = Sha256.hash(pwd1.value);
-                        pwd1.value = hashed;
-                    }
+                    // Removed code to hash the password
+                    // var pwd1 = document.getElementById("passwordField");
+                    // var pwd2 = document.getElementById("passwordHidden");
+                    // if (pwd1 && pwd2) {
+                    //     pwd1.style.display = 'none';
+                    //     pwd2.style.display = 'block';
+                    //     var hashed = Sha256.hash(pwd1.value);
+                    //     pwd1.value = hashed;
+                    // }
                 }
                 form.classList.add('was-validated');
             }, false);
