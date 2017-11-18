@@ -83,7 +83,7 @@ a:active {
     /*font-family: Segoe, "Segoe Ui", Optima, Candara, Calibri, Arial, sans-serif;*/
     /*font-family: Trebuchet, Tahoma, Arial, sans-serif;*/
     /*font-family: vishusBlogTitle, 'Century Gothic', 'Franklin Gothic Book', Trebuchet, Tahoma, Arial, sans-serif;*/
-    font-family: Tahoma, Verdana, Geneva;
+    font-family: vishusBlogTitle, Tahoma, Verdana, Geneva;
     font-weight: bold;
     text-align: center;
 }
@@ -337,7 +337,8 @@ mark, .v-term {
     order: 2;
     margin: 0px 0.5em;
     color: #e0e0e0;
-    max-width: 70ch;
+    /*max-width: 70ch;*/
+    max-width: 900px;
     font-family: vishusBlogText, Geneva, ‘Lucida Sans’, ‘Lucida Grande’, ‘Lucida Sans Unicode’, Verdana, sans-serif;
     /*font-family: Geneva, ‘Lucida Sans’, ‘Lucida Grande’, ‘Lucida Sans Unicode’, Verdana, sans-serif;*/
     font-size: 1.15em;
@@ -495,28 +496,30 @@ mark, .v-term {
 
 @font-face {
   font-family: vishusBlog;
-  src: local("vishusBlog"),
-  url('../fonts/Demonized.ttf');
+  src: local("Expansiva"),
+  url('../fonts/expansiva.ttf');
   font-weight: bold;
 }
 
 
 @font-face {
   font-family: vishusBlogTitle;
-  src: local("vishusBlogTitle"),
-  url('../fonts/ERASBD.ttf');
+  src: local("ArevBI"),
+  url('../fonts/arev.ttf');
   font-weight: bold;
 }
 
 @font-face {
   font-family: vishusBlogtext;
-  src: local("vishusBlogText"),
-  url('../fonts/Quicksand_Book.otf');
+  src: local("Gravity-Light"),
+  url('../fonts/gravitylight.otf');
   font-weight: bold;
 }
 
 
-
-
-
-
+@font-face {
+  font-family: vishusBlogText;
+  src: local("Gravity-Light"),
+  url('../fonts/gravitylight.ttf');
+  font-weight: bold;
+}
