@@ -36,8 +36,8 @@
 #![plugin(rocket_codegen)]
 
 extern crate rocket;
-extern crate regex;
-#[macro_use] extern crate lazy_static;
+#[allow(unused_imports)] extern crate regex;
+#[allow(unused_imports)] #[macro_use] extern crate lazy_static;
 // extern crate unic_ucd_category;
 extern crate unic_ucd;
 
