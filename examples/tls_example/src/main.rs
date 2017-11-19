@@ -41,11 +41,9 @@ use std::sync::Mutex;
 use std::path::{Path, PathBuf};
 
 mod administrator;
-mod password;
 mod layout;
 mod db;
 use administrator::*;
-use password::*;
 use layout::*;
 use db::*;
 
