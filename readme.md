@@ -101,9 +101,9 @@ Required:
 
 Optional (can be overridden): 
 
-* `fn flash_redirect(&self, ok_redir: &str, err_redir: &str, mut cookies: Cookies) -> Result<Redirect, Flash<Redirect>>`
+* `fn flash_redirect(&self, ok_redir: &str, err_redir: &str, cookies: &mut Cookies) -> Result<Redirect, Flash<Redirect>>`
     * Call the `authenticate()` method and if successful creates the private cookie to log the user in.  Redirects the user to the `ok_redir` page on successful authentication.  If authentication fails it calls the fail_url() to build a query string which is appended to `err_redir` (this allows the username to persist and be filled in inside the login form) and also sets a [FlashMessage](https://api.rocket.rs/rocket/response/struct.Flash.html) (a cookie that is deleted once read) indicating why the form failed
-* `fn redirect(&self, ok_redir: &str, err_redir: &str, mut cookies: Cookies) -> Result<Redirect, Redirect>`
+* `fn redirect(&self, ok_redir: &str, err_redir: &str, cookies: &mut Cookies) -> Result<Redirect, Redirect>`
     * Same as `flash_redirect()` except it does not set a Flashmessage, it only redirects to either the ok_redir page or err_redir page (with the query string returned by `fail_url()` appended)
 * `fn fail_url(user: &str) -> String`
     * Creates a query string that is appended to the url to indicate the username the user attempted to login with.  The default implementation creates the following string: "?user={username}" where {username} is the specified username
@@ -148,8 +148,8 @@ The login processing route will be a `post` route that
         let login = inner.form;
         login.flash_redirect("/login", "/login", cookies)
     }
-]
 
+```
 
 # Security
 The library will send passwords in plaintext.  It is highly recommended that you use TLS.  There is even an example showing how to use tls with this crate.  The changes are minimal.  If you absolutely need to hash a password before the password is sent the examples all include a sha256.js file from [http://www.movable-type.co.uk/scripts/sha256.html]([http://www.movable-type.co.uk/scripts/sha256.html](http://www.movable-type.co.uk/scripts/sha256.html)) which can be used for that very purpose.  Also the login.js file contains commented out code around line 15 that can be used to hash the password before sending it using the sha256.js file.  This method is extremely discouraged.  Sha hashes are fast, and thus very susceptible to rainbow table attacks.  Without using TLS the security is almost the same as plaintext when using just a hashed password. Use TLS.  [Let's Encrypt](https://letsencrypt.org/)) offers free certificates so there's no reason not to use https for production purposes.

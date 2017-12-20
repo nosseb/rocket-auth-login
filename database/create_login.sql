@@ -146,6 +146,9 @@ CREATE TABLE users (
 -- Dependencies: 200
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
+-- NOTE: the inserts here must call the crypt() function on the desired password with gen_salt('bf', 8) as the salt
+--       this is because the triggers for updating the password to a salt are not added until after the inserts
+
 
 INSERT INTO users (userid, username, display, is_admin, salt_hash) VALUES (1, 'andrew', 'Andrew Prindle', true, crypt('password', gen_salt('bf', 8)));
 INSERT INTO users (userid, username, display, is_admin, salt_hash) VALUES (2, 'admin', 'Administrator', true, crypt('password', gen_salt('bf', 8)));

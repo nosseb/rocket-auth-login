@@ -153,7 +153,7 @@ fn process_login(form: Form<LoginCont<AdministratorForm>>, mut cookies: Cookies)
     
     let inner = form.into_inner();
     let login = inner.form;
-    let output = login.flash_redirect("/login", "/login", cookies);
+    let output = login.flash_redirect("/login", "/login", &mut cookies);
     
     let end = start.elapsed();
     println!("Served in {}.{:08} seconds", end.as_secs(), end.subsec_nanos());

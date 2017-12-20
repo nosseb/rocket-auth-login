@@ -80,7 +80,7 @@ fn retry_login_flash(flash_msg: FlashMessage) -> Html<String> {
 fn process_login(form: Form<LoginCont<AdministratorForm>>, mut cookies: Cookies) -> Result<Redirect, Flash<Redirect>> {
     let inner = form.into_inner();
     let login = inner.form;
-    login.flash_redirect("/login", "/login", cookies)
+    login.flash_redirect("/login", "/login", &mut cookies)
 }
 
 #[get("/logout")]
@@ -128,7 +128,7 @@ fn main() {
         // If using a database connection:
         // .manage(data::init_pg_pool())
         
-        // zig using rocket_contrib's Templates
+        // using rocket_contrib's Templates
         // .attach(Template::fairing())
         .mount("/", routes![
             logged_in,

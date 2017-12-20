@@ -8,7 +8,8 @@ use std::collections::HashMap;
 use std::marker::Sized;
 use sanitization::*;
 
-#[derive(Debug, Clone, FromForm)]
+// #[derive(Debug, Clone, FromForm)]
+#[derive(Debug, Clone)]
 pub struct UserQuery {
     pub user: String,
 }
@@ -18,7 +19,7 @@ pub struct AuthCont<T: AuthorizeCookie> {
     pub cookie: T,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, FromForm)]
 pub struct AuthFail {
     pub user: String,
     pub msg: String,
@@ -164,8 +165,10 @@ pub trait AuthorizeCookie : CookieId {
     /// Deserialize the cookie data type - must be implemented by cookie data type
     fn retrieve_cookie(String) -> Option<Self> where Self: Sized;
     
-    /// Deletes a cookie.  This does not need to be implemented, it defaults to removing the private key with the named specified by cookie_id() method.
-    fn delete_cookie(mut cookies: Cookies) {
+    /// Deletes a cookie.  This does not need to be implemented, it defaults to removing
+    /// the private key with the named specified by cookie_id() method.
+    
+    fn delete_cookie(cookies: &mut Cookies) {
         cookies.remove_private( 
            Cookie::named( Self::cookie_id() )
         );
@@ -323,7 +326,7 @@ pub trait AuthorizeForm : CookieId {
     /// this is so that the user can see why it failed but when they refresh
     /// it will disappear, enabling a clean start, but with the user name
     /// from the url's query string (determined by `fail_url()`)
-    fn flash_redirect(&self, ok_redir: &str, err_redir: &str, mut cookies: Cookies) -> Result<Redirect, Flash<Redirect>> {
+    fn flash_redirect(&self, ok_redir: &str, err_redir: &str, cookies: &mut Cookies) -> Result<Redirect, Flash<Redirect>> {
         match self.authenticate() {
             Ok(cooky) => {
                 let cid = Self::cookie_id();
@@ -344,7 +347,7 @@ pub trait AuthorizeForm : CookieId {
     
     /// Redirect the user to one page on successful authentication or
     /// another page if authentication fails.
-    fn redirect(&self, ok_redir: &str, err_redir: &str, mut cookies: Cookies) -> Result<Redirect, Redirect> {
+    fn redirect(&self, ok_redir: &str, err_redir: &str, cookies: &mut Cookies) -> Result<Redirect, Redirect> {
         match self.authenticate() {
             Ok(cooky) => {
                 let cid = Self::cookie_id();
@@ -433,37 +436,28 @@ impl<'a, 'r, T: AuthorizeCookie> FromRequest<'a, 'r> for AuthCont<T> {
 /// input box names.  The function will return `Ok()` even if no username or
 /// password was entered, this is to allow custom field names to be accessed
 /// and authenticated by the `authenticate()` method.
-
 impl<'f, A: AuthorizeForm> FromForm<'f> for LoginCont<A> {
     type Error = &'static str;
     
     fn from_form(form_items: &mut FormItems<'f>, _strict: bool) -> Result<Self, Self::Error> {
-        // let mut user_pass = HashMap::new();
         let mut user: String = String::new();
         let mut pass: String = String::new();
-        // let mut pass: Vec<u8> = Vec::new();
-        
         let mut extras: HashMap<String, String> = HashMap::new();
+        
         for (key,value) in form_items {
             match key.as_str(){
                 "username" => {
-                    // user = sanitize(&value.url_decode().unwrap_or(String::new()));
                     user = A::clean_username(&value.url_decode().unwrap_or(String::new()));
                 },
                 "password" => {
-                    // pass = sanitize_password(&value.url_decode().unwrap_or(String::new()));
                     pass = A::clean_password(&value.url_decode().unwrap_or(String::new()));
-                    // pass = value.bytes().collect();
                 },
                 // _ => {},
                 a => {
-                    // extras.insert( a.to_string(), sanitize( &value.url_decode().unwrap_or(String::new()) ) );
                     extras.insert( a.to_string(), A::clean_extras( &value.url_decode().unwrap_or(String::new()) ) );
                 },
             }
         }
-        
-        // println!("Creating login form data structure with:\nUser: {}\nPass: {}\nExtras: {:?}", user, pass, extras);
         
         // Do not need to check for username / password here,
         // if the authentication method requires them it will
@@ -480,4 +474,17 @@ impl<'f, A: AuthorizeForm> FromForm<'f> for LoginCont<A> {
     }
 }
 
-
+impl<'f> FromForm<'f> for UserQuery {
+    type Error = &'static str;
+    
+    fn from_form(form_items: &mut FormItems<'f>, _strict: bool) -> Result<UserQuery, Self::Error> {
+        let mut name: String = String::new();
+        for (key,value) in form_items {
+            match key.as_str() {
+                "user" => { name = sanitize( &value.url_decode().unwrap_or(String::new()) ); },
+                _ => {},
+            }
+        }
+        Ok(UserQuery { user: name })
+    }
+}
