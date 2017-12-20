@@ -3,6 +3,9 @@
 # Database Example Setup
 First this particular example uses a postgresql database.  You must have postgresql installed on your machine.
 
+### Requirements
+The current database file requires postgresql 10.  This is due to the way the functions are written.  Someone with more postgresql experience could probably change this to work with older versions, if you do please let me know on github (vishusandy on github).
+
 ## Database Setup Instructions
 1. Go to the directory containing the `create_login.sql` file
 2. Run: `psql postgresql://postgres@localhost` where `postgres@localhost` is the username and host address
