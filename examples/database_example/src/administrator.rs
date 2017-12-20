@@ -5,10 +5,8 @@ use std::collections::HashMap;
 use std::str::{from_utf8};
 
 use super::PGCONN;
-use password::*;
 use auth::authorization::*;
 use auth::sanitization::*;
-// use auth::sanitization::*;
 
 /// The AdministratorCookie type is used to indicate a user has logged in as an administrator
 #[derive(Debug, Clone, Serialize, Deserialize)]

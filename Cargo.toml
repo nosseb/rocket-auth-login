@@ -1,7 +1,7 @@
 
 [package]
 name = "rocket-auth-login"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Andrew Prindle <prindle.andrew@gmail.com>"]
 
 description = "Login and authentication for rocket web apps.  This crate provides functions to process login forms and to deal with private cookies easily."
@@ -32,8 +32,8 @@ exclude = ["database", "examples/**"]
 
 [dependencies]
 htmlescape = "0.3.1"
-rocket = "0.3.3"
-rocket_codegen = "0.3.3"
+rocket = "=0.3.3"
+rocket_codegen = "=0.3.3"
 unic-ucd = "0.6.0"
 # unic-ucd-category = "0.6.0"
 # lazy_static = "0.2.8"

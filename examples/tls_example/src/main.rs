@@ -190,6 +190,7 @@ fn index(admin_opt: Option<AdministratorCookie>, flash_msg_opt: Option<FlashMess
     layout(&contents)
 }
 
+
 /// static_files() is needed to serve css/js/font files
 /// all static files should be placed in a folder, ex. static
 /// this prevents directory traversal attacks but still

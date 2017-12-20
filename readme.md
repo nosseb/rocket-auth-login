@@ -27,6 +27,9 @@ This crate provides traits that you will implement on two different custom types
     * When authentication is successful this structure will be serialized into a `String` that is stored in a [private cookie](https://api.rocket.rs/rocket/http/enum.Cookies.html#private-cookies)
     * The cookie data structure can be retrieved through a request guard for the specified user type
 
+## Version Note
+The Version 2.0 passes ownership of any cookies passed into the redirection methods which is not very convenient.  Version 2.1 uses a mutable reference to the cookies allowing them to be modified after calling the redirect methods (the redirect structure can be held in a variable and returned when needed).
+
 # Data Structures
 In your application define two custom data structures that will:
 

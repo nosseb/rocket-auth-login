@@ -44,7 +44,6 @@ mod administrator;
 mod layout;
 mod db;
 use administrator::*;
-use password::*;
 use layout::*;
 use db::*;
 

@@ -8,7 +8,6 @@ use std::collections::HashMap;
 use std::marker::Sized;
 use sanitization::*;
 
-// #[derive(Debug, Clone, FromForm)]
 #[derive(Debug, Clone)]
 pub struct UserQuery {
     pub user: String,

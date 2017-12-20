@@ -1,8 +1,6 @@
+
 use htmlescape::*;
-// use regex::Regex;
 
-
-// use unic_ucd_category::GeneralCategory as gc;
 use unic_ucd::category::GeneralCategory as gc;
 
 /// Filters out separators, control codes, unicode surrogates, and a few others
@@ -73,7 +71,6 @@ pub fn filter_non_characters_html(string: &str) -> String {
 /// while the htmlescape::encode_attribute() encodes those from encode_minimal plus more,
 /// as well as any non alpha-numeric ascii characters are hex encoded ( &#x00 );
 pub fn sanitize(string: &str) -> String {
-    // encode_attribute(string)
     encode_attribute(&filter_non_characters(string))
 }
 
@@ -92,7 +89,3 @@ pub fn sanitize_password(string: &str) -> String {
     filter_non_characters(string)
 }
 
-
-// assert_eq!(sanitize("andrew"), "andrew".to_string());
-// assert_eq!(sanitize_password("password"), "password".to_string());
-// assert_eq!(sanitize_text("text stuffs"), "text stuffs".to_string());

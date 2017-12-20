@@ -4,15 +4,12 @@ use rocket::request::FromRequest;
 use rocket::http::{Cookie, Cookies};
 use std::collections::HashMap;
 use std::str::{from_utf8};
-// use cookie::Cookie;
 
 use rocket::response::{Redirect, Flash};
 
 use super::PGCONN;
-use password::*;
 use auth::authorization::*;
 use auth::sanitization::*;
-// use auth::sanitization::*;
 
 /// The AdministratorCookie type is used to indicate a user has logged in as an administrator
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -26,7 +23,6 @@ pub struct AdministratorCookie {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AdministratorForm {
     pub username: String,
-    // pub password: &'b [u8],
     pub password: String,
 }
 
@@ -90,15 +86,10 @@ impl AuthorizeForm for AdministratorForm {
         let authstr = format!(r#"
             SELECT u.userid, u.username, u.display FROM users u WHERE u.username = '{username}' AND 
                 u.salt_hash = crypt('{password}', u.salt_hash)"#, username=&self.username, password=&self.password);
-            // , 'LATIN1')"#, username=&self.username, password=sanitize_password(from_utf8(&self.password).unwrap_or("")));
-        // let qrystr = format!("SELECT userid, username, display,  FROM users WHERE username = '{}' AND password = '{}' AND is_admin = '1'", &self.username, &self.password);
         let is_user_qrystr = format!("SELECT userid FROM users WHERE username = '{}'", &self.username);
         let is_admin_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND is_admin = '1'", &self.username);
-        // let password_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND password = '{}'", &self.username, &self.password);
         let password_qrystr = format!("SELECT u.userid FROM users u WHERE u.username = '{}' AND u.salt_hash = crypt('{}', u.salt_hash)", &self.username, &self.password);
-        // let password_qrystr = format!("SELECT userid FROM users WHERE username = '{}' AND password = '{}'", &self.username, from_utf8(&self.password).unwrap_or(""));
         println!("Attempting query: {}", authstr);
-        // if let Ok(qry) = conn.query(&qrystr, &[]) {
         if let Ok(qry) = conn.query(&authstr, &[]) {
             if !qry.is_empty() && qry.len() == 1 {
                 let row = qry.get(0);
@@ -138,26 +129,22 @@ impl AuthorizeForm for AdministratorForm {
     }
     
     /// Create a new login form instance
-    // fn new_form(user: &str, pass: &[u8], _extras: Option<HashMap<String, String>>) -> Self {
-    // fn new_form(user: &str, pass: Vec<u8>, _extras: Option<HashMap<String, String>>) -> Self {
     fn new_form(user: &str, pass: &str, _extras: Option<HashMap<String, String>>) -> Self {
         AdministratorForm {
             username: user.to_string(),
             password: pass.to_string(),
-            // password: pass,
         }
     }
     
     /// Define a custom flash_redirect() method that overrides the default
     /// implementation in authorization::AuthorizeForm trait.
     /// This allows the cookie to be made secure
-    fn flash_redirect(&self, ok_redir: &str, err_redir: &str, mut cookies: Cookies) -> Result<Redirect, Flash<Redirect>> {
+    fn flash_redirect(&self, ok_redir: &str, err_redir: &str, cookies: &mut Cookies) -> Result<Redirect, Flash<Redirect>> {
         match self.authenticate() {
             Ok(cooky) => {
                 let cid = Self::cookie_id();
                 let contents = cooky.store_cookie();
                 cookies.add_private(
-                    // Cookie::new(cid, contents)
                     Cookie::build(cid, contents)
                         .secure(true)
                         .finish()
