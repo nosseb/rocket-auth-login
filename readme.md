@@ -1,6 +1,28 @@
 % Rocket-auth-login - Authentication and Login library for Rust's Rocket Framework
 
+
+
+### Requires Nightly Rust
+
+Tested using nightly-2017-11-22-x86_64-pc-windows-msvc
+To install using rustup in windows and set as default use:
+
+```
+rustup toolchain install nightly-2017-11-22-x86_64-pc-windows-msvc
+rustup default nightly-2017-11-22-x86_64-pc-windows-msvc
+```
+
+Or on linux:
+
+```
+rustup toolchain install nightly-2017-11-22-x86_64-unknown-linux-gnu
+rustup default nightly-2017-11-22-x86_64-unknown-linux-gnu
+```
+
+
+
 # Cargo.toml
+
 In the cargo.toml add:
 
 ```

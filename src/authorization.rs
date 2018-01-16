@@ -453,7 +453,8 @@ impl<'f, A: AuthorizeForm> FromForm<'f> for LoginCont<A> {
                 },
                 // _ => {},
                 a => {
-                    extras.insert( a.to_string(), A::clean_extras( &value.url_decode().unwrap_or(String::new()) ) );
+                    // extras.insert( a.to_string(), A::clean_extras( &value.url_decode().unwrap_or(String::new()) ) );
+                    extras.insert( a.to_string(), value.url_decode().unwrap_or(String::new()) );
                 },
             }
         }
