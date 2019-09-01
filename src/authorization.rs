@@ -1,8 +1,8 @@
 
 use rocket::{Request, Outcome};
 use rocket::response::{Redirect, Flash};
-use rocket::request::{FromRequest, FromForm, FormItems};
-use rocket::http::{Cookie, Cookies};
+use rocket::request::{FromRequest, FromForm, FormItems, FormItem, FromFormValue};
+use rocket::http::{Cookie, Cookies, RawStr};
 
 use std::collections::HashMap;
 use std::marker::Sized;
@@ -73,22 +73,27 @@ pub trait CookieId {
 /// 
 /// ### Example
 ///
-/// ```
-/// 
+/// ```no_run
+///     # #![feature(proc_macro_hygiene, decl_macro)]
+///     # #[macro_use]
+///     # extern crate rocket;
+///     # extern crate serde_json;
+///     # #[macro_use]
+///     # extern crate serde;
 ///     use rocket::{Request, Outcome};
 ///     use rocket::request::FromRequest;
-///     use auth::authorization::*;
+///     use rocket::response::content::Html;
+///     use rocket_auth_login::authorization::*;
 ///     // Define a custom data type that hold the cookie information
+///     #[derive(Deserialize, Serialize)]
 ///     pub struct AdministratorCookie {
 ///         pub userid: u32,
 ///         pub username: String,
-///         pub display: Option<String>,
+///         pub display: String,
 ///     }
 ///     
 ///     // Implement CookieId for AdministratorCookie
 ///     impl CookieId for AdministratorCookie {
-///         // Tell 
-///         type CookieType = AdministratorCookie;
 ///         fn cookie_id<'a>() -> &'a str {
 ///             "asid"
 ///         }
@@ -103,11 +108,7 @@ pub trait CookieId {
 ///         fn retrieve_cookie(string: String) -> Option<Self> {
 ///             let mut des_buf = string.clone();
 ///             let des: Result<AdministratorCookie, _> = ::serde_json::from_str(&mut des_buf);
-///             if let Ok(cooky) = des {
-///                 Some(cooky)
-///             } else {
-///                 None
-///             }
+///             des.ok()
 ///         }
 ///     }
 ///     
@@ -148,10 +149,11 @@ pub trait CookieId {
 ///     #[get("/administrator", rank=2)]
 ///     fn admin_login_form() -> Html<String> {
 ///         // Html form here, see the example directory for a complete example
+///         unimplemented!()
 ///     }
 ///     
 ///     fn main() {
-///         rocket::ignite().mount("/", routes![admin_page, admin_login_form]).launc();
+///         rocket::ignite().mount("/", routes![admin_page, admin_login_form]).launch();
 ///     }
 ///     
 /// ```
@@ -196,16 +198,41 @@ pub trait AuthorizeCookie : CookieId {
 ///
 /// ## Example
 /// ```
-/// 
+///     # #![feature(proc_macro_hygiene, decl_macro)]
+///     # #[macro_use]
+///     # extern crate rocket;
+///     # extern crate serde_json;
 ///     use rocket::{Request, Outcome};
 ///     use std::collections::HashMap;
-///     use auth::authorization::*;
+///     use rocket_auth_login::authorization::*;
+///     # #[macro_use]
+///     # extern crate serde;
 ///     // Create the structure that will contain the login form data
 ///     #[derive(Debug, Clone, Serialize, Deserialize)]
 ///     pub struct AdministratorForm {
 ///         pub username: String,
 ///         pub password: String,
 ///     }
+///     # #[derive(Serialize, Deserialize)]
+///     # pub struct AdministratorCookie {
+///     #     pub userid: u32,
+///     #     pub username: String,
+///     #     pub display: String,
+///     # }
+///     # impl CookieId for AdministratorCookie {
+///     #  fn cookie_id<'a>() -> &'a str { "acid" }
+///     # }
+///     # impl AuthorizeCookie for AdministratorCookie {
+///     #     fn store_cookie(&self) -> String {
+///     #         ::serde_json::to_string(self).expect("Could not serialize structure")
+///     #     }
+///     #     fn retrieve_cookie(string: String) -> Option<Self> {
+///     #         let mut des_buf = string.clone();
+///     #         let des: Result<AdministratorCookie, _> = ::serde_json::from_str(&mut des_buf);
+///     #         des.ok()
+///     #     }
+///     # }
+///
 ///     
 ///     // Ipmlement CookieId for the form structure
 ///     impl CookieId for AdministratorForm {
@@ -228,7 +255,7 @@ pub trait AuthorizeCookie : CookieId {
 ///                     AdministratorCookie {
 ///                         userid: 1,
 ///                         username: "administrator".to_string(),
-///                         display: Some("Administrator".to_string()),
+///                         display: "Administrator".to_string(),
 ///                     }
 ///                 )
 ///             } else {
@@ -325,21 +352,21 @@ pub trait AuthorizeForm : CookieId {
     /// this is so that the user can see why it failed but when they refresh
     /// it will disappear, enabling a clean start, but with the user name
     /// from the url's query string (determined by `fail_url()`)
-    fn flash_redirect(&self, ok_redir: &str, err_redir: &str, cookies: &mut Cookies) -> Result<Redirect, Flash<Redirect>> {
+    fn flash_redirect(&self, ok_redir: impl Into<String>, err_redir: impl Into<String>, cookies: &mut Cookies) -> Result<Redirect, Flash<Redirect>> {
         match self.authenticate() {
             Ok(cooky) => {
                 let cid = Self::cookie_id();
                 let contents = cooky.store_cookie();
                 cookies.add_private(Cookie::new(cid, contents));
-                Ok(Redirect::to(ok_redir))
+                Ok(Redirect::to(ok_redir.into()))
             },
             Err(fail) => {
-                let mut furl = String::from(err_redir);
+                let mut furl = err_redir.into();
                 if &fail.user != "" {
                     let furl_qrystr = Self::fail_url(&fail.user);
                     furl.push_str(&furl_qrystr);
                 }
-                Err( Flash::error(Redirect::to(&furl), &fail.msg) )
+                Err( Flash::error(Redirect::to(furl), &fail.msg) )
             },
         }
     }
@@ -352,7 +379,7 @@ pub trait AuthorizeForm : CookieId {
                 let cid = Self::cookie_id();
                 let contents = cooky.store_cookie();
                 cookies.add_private(Cookie::new(cid, contents));
-                Ok(Redirect::to(ok_redir))
+                Ok(Redirect::to(ok_redir.to_string()))
             },
             Err(fail) => {
                 let mut furl = String::from(err_redir);
@@ -360,7 +387,7 @@ pub trait AuthorizeForm : CookieId {
                     let furl_qrystr = Self::fail_url(&fail.user);
                     furl.push_str(&furl_qrystr);
                 }
-                Err( Redirect::to(&furl) )
+                Err( Redirect::to(furl) )
             },
         }
     }
@@ -381,13 +408,34 @@ impl<T: AuthorizeCookie + Clone> AuthCont<T> {
 /// 
 /// ```rust,no_run
 /// 
-///     use auth::authorization::*;
-///     # use administration:*;
-///     use rocket;
+///     # #![feature(proc_macro_hygiene, decl_macro)]
+///     # #[macro_use]
+///     # extern crate rocket;
+///     # #[macro_use]
+///     # extern crate serde;
+///     # use rocket::response::content::Html;
+///     use rocket_auth_login::authorization::*;
+///
+/// 
+///     # #[derive(Deserialize)]
+///     # pub struct AdministratorCookie {
+///     # }
+///     # impl CookieId for AdministratorCookie {
+///     #  fn cookie_id<'a>() -> &'a str { "acid" }
+///     # }
+///     # impl AuthorizeCookie for AdministratorCookie {
+///     #     fn store_cookie(&self) -> String {
+///     #         unimplemented!()
+///     #     }
+///     #     fn retrieve_cookie(string: String) -> Option<Self> {
+///     #         unimplemented!()
+///     #     }
+///     # }
+///
 ///     #[get("/protected")]
 ///     fn protected(container: AuthCont<AdministratorCookie>) -> Html<String> {
 ///         let admin = container.cookie;
-///         String::new()
+///         Html(String::new())
 ///     }
 ///     
 ///     # fn main() {
@@ -443,7 +491,7 @@ impl<'f, A: AuthorizeForm> FromForm<'f> for LoginCont<A> {
         let mut pass: String = String::new();
         let mut extras: HashMap<String, String> = HashMap::new();
         
-        for (key,value) in form_items {
+        for FormItem { key, value, .. } in form_items {
             match key.as_str(){
                 "username" => {
                     user = A::clean_username(&value.url_decode().unwrap_or(String::new()));
@@ -479,12 +527,20 @@ impl<'f> FromForm<'f> for UserQuery {
     
     fn from_form(form_items: &mut FormItems<'f>, _strict: bool) -> Result<UserQuery, Self::Error> {
         let mut name: String = String::new();
-        for (key,value) in form_items {
+        for FormItem { key, value, .. } in form_items {
             match key.as_str() {
                 "user" => { name = sanitize( &value.url_decode().unwrap_or(String::new()) ); },
                 _ => {},
             }
         }
         Ok(UserQuery { user: name })
+    }
+}
+
+impl<'f> FromFormValue<'f> for UserQuery {
+    type Error = &'static str;
+    
+    fn from_form_value(form_value: &'f RawStr) -> Result<Self, Self::Error> {
+        Ok(UserQuery { user: sanitize(&form_value.url_decode().unwrap_or(String::new())) })
     }
 }
